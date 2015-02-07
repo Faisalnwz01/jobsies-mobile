@@ -3,7 +3,9 @@
   "version": "0.0.0",
   "dependencies": {
     "ionic": "v1.0.0-beta.14",
-    "ngCordova": "0.1.12-alpha"
+    "ngCordova": "0.1.12-alpha",
+    "angular-cookies": "~1.3.12",
+    "angular-resource": "~1.3.12"
   },
   "devDependencies": {
     "angular-mocks": "~1.3.6",
@@ -13,4 +15,3 @@
     "angular": "1.3.6"
   }
 }
-

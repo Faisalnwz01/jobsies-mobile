@@ -1,6 +1,10 @@
 angular.module('starter.controllers', [])
 
-.controller('DashCtrl', function($scope) {})
+// .controller('DashCtrl', function($scope, $http) {
+//  $http.get("http://localhost:9000/api/things").then(function (thing){
+//   console.log(thing)
+//  })
+// })
 
 .controller('ChatsCtrl', function($scope, Chats) {
   $scope.chats = Chats.all();

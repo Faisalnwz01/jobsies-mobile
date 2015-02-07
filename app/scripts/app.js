@@ -1,3 +1,8 @@
+
+var requestToken = "";
+var accessToken = "";
+var clientId = "client_id_here";
+var clientSecret = "client_secret_here";
 // Ionic Starter App
 
 // angular.module is a global place for creating, registering and retrieving Angular modules
@@ -5,7 +10,7 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
+angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', 'auth.services', 'dash.controllers', 'Savejobs.services', 'ngCookies', 'user.service', 'ngResource'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
