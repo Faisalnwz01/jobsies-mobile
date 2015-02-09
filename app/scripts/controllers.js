@@ -6,18 +6,19 @@ angular.module('starter.controllers', [])
 //  })
 // })
 
-.controller('ChatsCtrl', function($scope, Chats) {
-  $scope.chats = Chats.all();
-  $scope.remove = function(chat) {
-    Chats.remove(chat);
-  }
+.controller('LoginCtrl', function($scope, $window) {
+   $scope.loginOauth = function(provider) {
+      
+      $window.location.href = 'http://localhost:9000/auth/' + provider;
+    };
+
 })
 
 .controller('ChatDetailCtrl', function($scope, $stateParams, Chats) {
   $scope.chat = Chats.get($stateParams.chatId);
 })
 
-.controller('FriendsCtrl', function($scope, Friends) {
+.controller('FriendsCtrl', function($scope) {
   $scope.friends = Friends.all();
 })
 
