@@ -6,11 +6,14 @@ angular.module('starter.controllers', [])
 //  })
 // })
 
-.controller('LoginCtrl', function($scope, $window) {
+.controller('LoginCtrl', function($scope, $window, $rootScope) {
    $scope.loginOauth = function(provider) {
       
       $window.location.href = 'http://localhost:9000/auth/' + provider;
     };
+
+    $rootScope.hideNav = true; 
+    console.log($scope.hideNav)
 
 })
 
