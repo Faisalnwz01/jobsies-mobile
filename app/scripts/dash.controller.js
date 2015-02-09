@@ -1,7 +1,8 @@
 angular.module('dash.controllers', [])
 
-.controller('DashCtrl', function($scope, $http, SaveJobs, $timeout, User, $log, userPreferences, Auth, $location, $window) {
+.controller('DashCtrl', function($scope, $http, SaveJobs, $timeout, User, $log, userPreferences, Auth, $location, $window, $stateParams) {
 
+console.log($stateParams.id)
     // $scope.user = {};
     // $scope.errors = {};
 
@@ -22,11 +23,14 @@ angular.module('dash.controllers', [])
     //     });
     //   }
     // };
-
+$http.get('http://localhost:9000/api/users/mobile/'+ $stateParams.id).then(function(user){
+    $scope.user = user.data
+    console.log($scope.user)
+})
 
 
     $scope.loginOauth = function(provider) {
-    	console.log('hit')
+    	
       $window.location.href = 'http://localhost:9000/auth/' + provider;
     };
  
@@ -54,9 +58,10 @@ angular.module('dash.controllers', [])
 //             // })
 //         }
 
+// console.log(Auth.getCurrentUser())
        
-        $scope.user = Auth.getCurrentUser();
-        console.log($scope.user)
+//         $scope.user = user
+//         console.log($scope.user)
        
 
 //         //this autocompletes the location search input with US cities
