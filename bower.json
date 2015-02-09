@@ -6,7 +6,8 @@
     "ngCordova": "0.1.12-alpha",
     "angular-cookies": "~1.3.12",
     "angular-resource": "~1.3.12",
-    "ionic-contrib-tinder-cards": "*"
+    "ionic-contrib-tinder-cards": "*",
+    "jquery": "~2.1.3"
   },
   "devDependencies": {
     "angular-mocks": "~1.3.6",
