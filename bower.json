@@ -5,13 +5,15 @@
     "ionic": "v1.0.0-beta.14",
     "ngCordova": "0.1.12-alpha",
     "angular-cookies": "~1.3.12",
-    "angular-resource": "~1.3.12"
+    "angular-resource": "~1.3.12",
+    "ionic-contrib-tinder-cards": "*"
   },
   "devDependencies": {
     "angular-mocks": "~1.3.6",
     "angular-scenario": "~1.3.6"
   },
   "resolutions": {
-    "angular": "1.3.6"
+    "angular": "1.3.6",
+    "collide": "1.0.0-beta.3"
   }
 }

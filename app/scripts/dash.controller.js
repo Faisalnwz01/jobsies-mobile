@@ -33,7 +33,22 @@ $http.get('http://localhost:9000/api/users/mobile/'+ $stateParams.id).then(funct
     	
       $window.location.href = 'http://localhost:9000/auth/' + provider;
     };
- 
+     $scope.cards = [
+      { hello: 'hi'},
+      { grant: "mike"}
+    ];
+
+    $scope.cardDestroyed = function(index) {
+      $scope.cards.splice(index, 1);
+    };
+
+    $scope.cardSwiped = function(index) {
+      var newCard = // new card data
+      $scope.cards.push(newCard);
+    };
+
+
+
 // 	     $scope.currentJob = 0;
 //         $scope.page = 0;
 //         $scope.totalResults;
