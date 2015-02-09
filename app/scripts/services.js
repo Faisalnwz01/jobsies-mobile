@@ -93,4 +93,11 @@ angular.module('starter.services', [])
       return friends[friendId];
     }
   }
-});
+})
+// .factory('User', function($resource, $stateParams, $http) {
+//     return {
+//       get: function() {
+//         return $http.get('http://localhost:9000/api/users/mobile/' + $stateParams.id)
+//       }
+//     }
+//   });
