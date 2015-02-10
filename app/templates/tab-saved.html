@@ -1,15 +1,30 @@
-<ion-view view-title="Saved">
+<ion-header-bar class="bar-positive">
+      <h1 class="title">Accordion List</h1>
+    </ion-header-bar>
 
-  <ion-content class="padding">
-  <br>
-  <br>
-  <br>
-  <div>{{user.name}}</div>
+    <ion-content>
 
-<div ng-repeat="job in user.jobs_saved">
+      <ion-list show-delete="shouldShowDelete"
+          show-reorder="shouldShowReorder"
+          can-swipe="listCanSwipe">
 
-{{job}}
-</div>
+        <div  ng-repeat="job in jobArray" job="job">
+          <ion-item class="item-stable"
+                   ng-click="toggleGroup(job)"
+                    ng-class="{active: isGroupShown(job)}">
+                     <ion-option-button class="button-positive">
+      Share
+    </ion-option-button>
 
-</ion-content>
-</ion-view>
+              <i class="icon" ng-class="isGroupShown(job) ? 'ion-minus' : 'ion-plus'"></i>
+            &nbsp;
+            <p>Job Title: {{job.jobtitle}}</p>
+          </ion-item>
+          <ion-item class="item-accordion"
+                    ng-show="isGroupShown(job)">
+            {{job.snippet}}
+          </ion-item>
+        </div>
+      </ion-list>
+
+    </ion-content>
