@@ -1,39 +1,54 @@
 <ion-view view-title="Jobs Page">
   <ion-content class="padding">
 
-
+  <div class="col">
+<div class="row">
+ 
 
     
 <td-cards>
-        <td-card ng-repeat="job in jobArray" on-swipe-left="saveOrPass('pass', job)"  on-swipe-right="saveOrPass('save', job)" on-partial-swipe="cardPartialSwipe(amt)" ng-show="$index===currentJob" class="card-{{$index}}">
-<div class="flip-container" ng-click = "flipCard()">
-  <div class="flipper">
-    <div class="{{cardClass}}">
-      
+        <td-card ng-repeat="job in jobArray" on-swipe-left="saveOrPass('pass', job)"  on-swipe-right="saveOrPass('save', job)" on-partial-swipe="cardPartialSwipe(amt)" ng-show="$index===currentJob" class="card-{{$index}}" ng-click="flipCard()">
 
-          <div class="image">
+
+          <div class="image" ng-hide="flip">
             <center>
+            <img src = "http://indeed.com/{{job.logo}}">
             <h5>{{job.jobtitle}} At {{job.company}}</h5>
             <h6>{{job.formattedLocationFull}}</h6>
           </center>
 
             <div class="no-text">NOPE</div>
-            <img src = "{{job.logo}}">
-            <h6>Description:</h6>
+            <h5>Description:</h5>
             <p>{{job.snippet}}</p>
             <div class="yes-text">SAVE</div>
           </div>
 
+          <div class="image" ng-show="flip">
+            <center>
+              <img src = "http://indeed.com/{{job.logo}}">
+            <h5>{{job.jobtitle}} At {{job.company}}</h5>
+          </center>
+            <h5>Qualifications:</h5>
+            <p>{{job.summary}}</p>
 
-      <div class="back">
-      fuck you 
-    </div>
-      </div>
+            <button class="button icon-left ion-star button-positive">Favorites</button>
+
+           <!--  <h4 a href = "{{job.}}"></h4> -->
+
+            <div class="no-text">NOPE</div>
+            <div class="yes-text">SAVE</div>
+         
+
+          </div>
+
+
+
+        </td-card>
+      </td-cards>
 
   </div>
 </div>
-        </td-card>
-      </td-cards>
+
    
     
   </ion-content>

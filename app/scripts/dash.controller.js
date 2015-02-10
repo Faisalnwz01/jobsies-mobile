@@ -2,13 +2,17 @@ angular.module('dash.controllers', [])
 
 .controller('DashCtrl', function($scope, $http, SaveJobs, $timeout, $log, userPreferences, $location, $window, $stateParams, indeedapi) {
 
-$scope.cardClass = "front";
+
+
+
+$scope.flip = false; 
+
 $scope.flipCard = function(){
-    if($scope.cardClass === "front"){
-    $scope.cardClass = "back"
+    if($scope.flip === false){
+    $scope.flip = true
 }
 else{
-    $scope.cardClass = 'front'
+    $scope.flip = false
 }
 
 
