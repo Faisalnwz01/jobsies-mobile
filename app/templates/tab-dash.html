@@ -14,17 +14,17 @@
       </div>
     </div>
 <td-cards>
-        <td-card ng-repeat="card in cards" on-destroy="cardDestroyed($index)" on-swipe-left="cardSwipedLeft($index)" on-swipe-right="cardSwipedRight($index)" on-partial-swipe="cardPartialSwipe(amt)" class="card-{{$index}}">
+        <td-card ng-repeat="job in jobArray" on-swipe-left="saveOrPass('pass', job)"  on-swipe-right="saveOrPass('save', job)" on-partial-swipe="cardPartialSwipe(amt)" ng-show="$index===currentJob" class="card-{{$index}}">
           <div class="image" >
             <div class="no-text">NOPE</div>
-            <img src="http://thecatapi.com/api/images/get?format=src&type=gif">
+            {{job.jobtitle}}
+            {{job.company}}
+            {{job.snippet}}
             <div class="yes-text">LIKE</div>
           </div>
 
         </td-card>
       </td-cards>
-      <div ng-repeat = "job in jobArray">{{job}}
-      <button ng-click="saveOrPass('save', job)">Pass</button>
       </div>
   </ion-content>
 </ion-view>
