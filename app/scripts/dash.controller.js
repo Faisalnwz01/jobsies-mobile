@@ -14,14 +14,14 @@ angular.module('dash.controllers', [])
         grant: "mike"
     }];
 
-    $scope.cardDestroyed = function(index) {
-        $scope.cards.splice(index, 1);
-    };
+    // $scope.cardDestroyed = function(index) {
+    //     $scope.cards.splice(index, 1);
+    // };
 
-    $scope.cardSwiped = function(index) {
-        var newCard = // new card data
-            $scope.cards.push(newCard);
-    };
+    // $scope.cardSwiped = function(index) {
+    //     var newCard = // new card data
+    //         $scope.cards.push(newCard);
+    // };
 
 
    
@@ -166,15 +166,15 @@ angular.module('dash.controllers', [])
                             $scope.getSavedJobsies();
                         }, 1000)
                     } else if (status == 'pass') {
-                        toast('Job Passed :(', 3000)
+                        // toast('Job Passed :(', 3000)
                     }
                     if ($scope.numberOfRecruiterJobs == 1) {
-                        $scope.getJobs($scope.user.jobUserLookingFor, $scope.user.locationUserWantsToWorkIn);
+                        $scope.getJobs($scope.userHeadline, $scope.jobLocation);
                     }
                     $scope.numberOfRecruiterJobs -= 1;
                 }
             } else {
-                $scope.currentJob += 1;
+                //$scope.currentJob += 1;
                 $scope.jobsSeen += 1;
                 if ($scope.jobsSeen == $scope.totalResults) {
                     $scope.searchDone = true;
@@ -187,7 +187,7 @@ angular.module('dash.controllers', [])
                     }
                 }
                 if (status == 'save') {
-                    toast('Job Saved!! :)', 3000)
+                    // toast('Job Saved!! :)', 3000)
                     if(job.numLikes){
                         job.numLikes +=1;
                     }
@@ -197,10 +197,11 @@ angular.module('dash.controllers', [])
                         $scope.getSavedJobsies();
                     }, 1000)
                 }
-                if (status == 'pass') {
-                    toast('Job Passed :(', 3000)
-                }
+                // if (status == 'pass') {
+                //     toast('Job Passed :(', 3000)
+                // }
             }
+            console.log("end of save", $scope.currentJob);
         }
 
         $scope.removeJobFromUser = function(job) {
