@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('starter.controllers')
-    .factory('indeedapi', function($http, $q, Savejobs, $stateParams) {
+    .factory('indeedapi', function($http, $q, $stateParams) {
         return {
             getIndeedJobs: function(query, location, start) {
                 return new $q(function(resolve, reject) {
