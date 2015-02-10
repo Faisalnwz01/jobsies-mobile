@@ -31,7 +31,6 @@ angular.module('dash.controllers', [])
          SaveJobs.doHttpUser(function(user) {
 
                  $scope.user = user
-                 console.log($scope.user)
 
 
 
@@ -105,7 +104,7 @@ angular.module('dash.controllers', [])
                 })
                 $scope.numberOfRecruiterJobs = jobsies.length;
                 $scope.jobArray = jobsies;
-                console.log($scope.jobArray)
+              
                 if ($scope.jobArray.length == 0) {
                     $scope.getJobs(userHeadline, jobLocation)
                 }
