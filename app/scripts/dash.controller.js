@@ -6,6 +6,7 @@ angular.module('dash.controllers', [])
 
 
 $scope.flip = false; 
+
 $scope.flipCard = function(){
     if($scope.flip === false){
     $scope.flip = true
@@ -22,11 +23,7 @@ else{
 
         $window.location.href = 'http://localhost:9000/auth/' + provider;
     };
-    $scope.cards = [{
-        hello: 'hi'
-    }, {
-        grant: "mike"
-    }];
+
 
     // $scope.cardDestroyed = function(index) {
     //     $scope.cards.splice(index, 1);
@@ -95,12 +92,17 @@ else{
         $scope.locationCutter();
 
         //gets  jobs from the indeed api to display on the home page.
-        $scope.getJobs = function(headline, location) {
-            indeedapi.getIndeedJobs(headline, location, 0).then(function(jobs) {
-                console.log(jobs, 'jobssssssssssssssssssss')
-                $scope.currentJob = 0;
-                $scope.jobArray = jobs.jobArray;
-                $scope.totalResults = jobs.totalResults;
+        $scope.getJobs = function(headline, location, start) {
+            indeedapi.getIndeedJobs(headline, location, start||0).then(function(jobs) {
+                if(jobs.jobArray.length == 0){
+                    $scope.page +=1;
+                    $scope.getJobs(headline, location, (start+25))
+                }
+                else {
+                    $scope.currentJob = 0;
+                    $scope.jobArray = jobs.jobArray;
+                    $scope.totalResults = jobs.totalResults;
+                }
             })
         };
 
@@ -118,7 +120,7 @@ else{
                 })
                 $scope.numberOfRecruiterJobs = jobsies.length;
                 $scope.jobArray = jobsies;
-              
+
                 if ($scope.jobArray.length == 0) {
                     $scope.getJobs(userHeadline, jobLocation)
                 }
@@ -167,7 +169,7 @@ else{
 
 
         //save jobs to the database, also call indeed for more results
-        // after a user has gone through 25 jobs
+        // after a user has gone through x jobs
         $scope.saveOrPass = function(status, job) {
             $scope.currentJob += 1;
             if (job.recruiter_id != undefined) {
@@ -191,11 +193,11 @@ else{
                 if ($scope.jobsSeen == $scope.totalResults) {
                     $scope.searchDone = true;
                 }
-                if ($scope.currentJob === 25) {
+                if ($scope.currentJob === $scope.jobArray.length) {
                     if ($scope.jobsSeen < $scope.totalResults) {
                         $scope.page += 1;
                         $scope.currentJob = 0;
-                        indeedapi.getIndeedJobs($scope.user.jobUserLookingFor || $scope.userHeadline, $scope.user.locationUserWantsToWorkIn || $scope.jobLocation, 25 * $scope.page);
+                        $scope.getJobs($scope.user.jobUserLookingFor || $scope.userHeadline, $scope.user.locationUserWantsToWorkIn || $scope.jobLocation, 25 * $scope.page);
                     }
                 }
                 if (status == 'save') {
@@ -223,5 +225,21 @@ else{
         }
 
 })
+
+ /*
+   * if given group is the selected group, deselect it
+   * else, select the given group
+   */
+  $scope.toggleGroup = function(group) {
+    if ($scope.isGroupShown(group)) {
+      $scope.shownGroup = null;
+    } else {
+      $scope.shownGroup = group;
+    }
+  };
+  $scope.isGroupShown = function(group) {
+    return $scope.shownGroup === group;
+  };
+
 
 })
