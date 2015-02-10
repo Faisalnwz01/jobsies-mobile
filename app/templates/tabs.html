@@ -8,7 +8,7 @@ navigation history that also transitions its views in and out.
 
   <!-- Chats Tab -->
   <ion-tab title="Login" icon-off="ion-social-linkedin-outline" icon-on="ion-social-linkedin" href="#/tab/login">
-    <ion-nav-view name="tab-chats" ></ion-nav-view>
+    <ion-nav-view name="tab-login" ></ion-nav-view>
   </ion-tab>
 
    <!-- Dashboard Tab -->
@@ -21,11 +21,14 @@ navigation history that also transitions its views in and out.
     <ion-nav-view name="tab-friends"></ion-nav-view>
   </ion-tab>
 
+<!-- Account Tab -->
+  <ion-tab title="Saved" icon-off="ion-ios7-heart-outline"  icon-on="ion-ios7-gear" href="#/tab/saved">
+    <ion-nav-view name="tab-saved"></ion-nav-view>
+  </ion-tab>
 
   <!-- Account Tab -->
   <ion-tab title="Account" icon-off="ion-ios7-gear-outline" icon-on="ion-ios7-gear" href="#/tab/account">
     <ion-nav-view name="tab-account"></ion-nav-view>
   </ion-tab>
-
 
 </ion-tabs>
