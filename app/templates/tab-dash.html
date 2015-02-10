@@ -12,7 +12,7 @@
 
           <div class="image" ng-hide="flip">
             <center>
-            <img src = "http://indeed.com/{{job.logo}}">
+          <img src= "http://indeed.com/{{job.logo}}" onerror='this.onerror = null; this.src="http://www.mrwallpaper.com/wallpapers/Dragon-Rider.jpg"'>
             <h5>{{job.jobtitle}} At {{job.company}}</h5>
             <h6>{{job.formattedLocationFull}}</h6>
           </center>
@@ -25,13 +25,14 @@
 
           <div class="image" ng-show="flip">
             <center>
-              <img src = "http://indeed.com/{{job.logo}}">
+             <img src= "http://indeed.com/{{job.logo}}" onerror='this.onerror = null; this.src="http://www.mrwallpaper.com/wallpapers/Dragon-Rider.jpg"'>
             <h5>{{job.jobtitle}} At {{job.company}}</h5>
           </center>
             <h5>Qualifications:</h5>
             <p>{{job.summary}}</p>
-
-            <button class="button icon-left ion-star button-positive">Favorites</button>
+<center>
+            <a href = "{{job.url}}" target = '_blank'><button class="button icon-left ion-star button-positive" >View Full Post</button></a>
+          </center>
 
            <!--  <h4 a href = "{{job.}}"></h4> -->
 
@@ -45,7 +46,7 @@
 
         </td-card>
       </td-cards>
-
+ 
   </div>
 </div>
 
