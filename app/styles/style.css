@@ -78,7 +78,7 @@ td-card img {
   perspective: 1000;
 }
   /* flip the pane when hovered */
-  .flip-container:active .flipper, .flip-container.hover .flipper {
+  .flip-container: .flipper, .flip-container.hover .flipper {
     transform: rotateY(180deg);
   }
 
