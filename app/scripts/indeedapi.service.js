@@ -22,7 +22,7 @@ angular.module('starter.controllers')
                                 })
                                     .then(function(search_response) {
 
-                                        $http.get('http://localhost:9000/api/users/'+getUser._id+'/jobPopulate').then(function(user){
+                                        $http.get('http://localhost:9000/api/users/'+getUser.data._id+'/jobPopulate').then(function(user){
                                         var savedJobs = user.data.jobs_saved;
                                         var savedJobKeys = [];
                                         for (var j=0; j<savedJobs.length; j++) {
