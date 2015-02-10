@@ -49,16 +49,16 @@ td-card img {
 
 .yes-text {
   position: absolute;
-  top: 10px;
-  left: 10px;
+  bottom: 10px;
+  right: 10px;
   font-size: 30px;
   color: rgb(111, 250, 111);
   opacity: 0;
 }
 .no-text {
   position: absolute;
-  top: 10px;
-  right: 10px;
+  bottom: 10px;
+  left: 10px;
   font-size: 30px;
   color: rgb(255, 115, 115);
   opacity: 0;
@@ -71,4 +71,6 @@ td-card img {
   opacity: 0;
 }
 
-
+.summary {
+  padding-bottom: 50px;
+}

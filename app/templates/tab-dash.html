@@ -1,59 +1,43 @@
 <ion-view view-title="Jobs Page">
-  <ion-content class="padding">
-
-  <div class="col">
-<div class="row">
- 
-
-    
+  <ion-content class="padding">  
 <td-cards>
+
         <td-card ng-repeat="job in jobArray" on-swipe-left="saveOrPass('pass', job)"  on-swipe-right="saveOrPass('save', job)" on-partial-swipe="cardPartialSwipe(amt)" ng-show="$index===currentJob" class="card-{{$index}}" ng-click="flipCard()">
-
-
+          <div class="list card">
           <div class="image" ng-hide="flip">
-            <center>
-          <img style = "height: 300px; width: 300px; " src= "http://indeed.com/{{job.logo}}" onerror='this.onerror = null; this.src="http://www.mrwallpaper.com/wallpapers/Dragon-Rider.jpg"'>
-            <h5>{{job.jobtitle}} At {{job.company}}</h5>
-            <p><i>{{job.formattedLocationFull}}</i></p>
-          </center>
-
+          <div class="card">
+            <div class="item item-divider">
+             <center><h2>{{job.jobtitle}}</h2></center>
+            </div>
+            <div class="item item-text-wrap">
+             <center><p>Posted {{job.formattedRelativeTime}}</p></center>
+              <center><p> in {{job.formattedLocationFull}} </p></center>
+             <center><p>by {{job.company}}</p></center>
+            </div>
+          </div>
+          <div class="item item-body">
+          <img class = "full-image" src= "http://indeed.com/{{job.logo}}" onerror='this.onerror = null; this.src="http://www.mrwallpaper.com/wallpapers/Dragon-Rider.jpg"'>
             <div class="no-text">NOPE</div>
-            <h5>Description:</h5>
             <p>{{job.snippet}}</p>
             <div class="yes-text">SAVE</div>
           </div>
+        </div>
 
           <div class="image" ng-show="flip">
-            <center>
-             <img src= "http://indeed.com/{{job.logo}}" onerror='this.onerror = null; this.src="http://www.mrwallpaper.com/wallpapers/Dragon-Rider.jpg"'>
-            <h5>{{job.jobtitle}} At {{job.company}}</h5>
-          </center>
-            <h5>Qualifications:</h5>
-            <p>{{job.summary}}</p>
-<center>
-            <a href = "{{job.url}}" target = '_blank'><button class="button icon-left ion-star button-positive" >View Full Post</button></a>
-
-          </center>
-
-           <!--  <h4 a href = "{{job.}}"></h4> -->
-
-            <div class="no-text">NOPE</div>
-            <div class="yes-text">SAVE</div>
-            <br>
-            <br>
-         
-
+          <div class="card">
+            <div class="item item-divider">
+             <center><h2>{{job.jobtitle}}</h2></center>
+            </div>
+             <div class="item item-body">
+                <div class="no-text">NOPE</div>
+                <p>{{job.summary}}</p>          
+                <div class="yes-text">SAVE</div>
+                <a href = "{{job.url}}" target = '_blank'><button class="button icon-left ion-star button-positive" >View Full Post</button></a>
+            </div>
           </div>
-
-
-
+         </div>
+           
         </td-card>
       </td-cards>
- 
-  </div>
-</div>
-
-   
-    
   </ion-content>
 </ion-view>
