@@ -53,10 +53,20 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
     }
   })
 
-  .state('tab.chats', {
+  .state('tab.saved', {
+    url: '/saved:id',
+    views: {
+      'tab-saved': {
+        templateUrl: 'templates/tab-saved.html',
+        controller: 'DashCtrl'
+      }
+    }
+  })
+
+  .state('tab.login', {
       url: '/login',
       views: {
-        'tab-chats': {
+        'tab-login': {
           templateUrl: 'templates/tab-login.html',
           controller: 'LoginCtrl'
         }

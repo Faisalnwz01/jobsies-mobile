@@ -24,7 +24,7 @@ angular.module('dash.controllers', [])
     // };
 
 
-   
+
         // $scope.user = user.data
 
 
@@ -32,9 +32,9 @@ angular.module('dash.controllers', [])
 
                  $scope.user = user
                  console.log($scope.user)
-                    
-            
-  
+
+
+
 
 
         $scope.currentJob = 0;
@@ -61,8 +61,8 @@ angular.module('dash.controllers', [])
             // })
         }
 
-       
-       
+
+
 
         //this autocompletes the location search input with US cities
         $scope.options = {
@@ -97,8 +97,8 @@ angular.module('dash.controllers', [])
             SaveJobs.getRecruiterJobs().then(function(jobs) {
                 var allJobsies = jobs.data;
                 var jobsies = allJobsies.filter(function(element) {
-                    if (element.recruiter_id && 
-                        jobLocation.toLowerCase().search(element.formattedLocationFull.toLowerCase()) > -1 && 
+                    if (element.recruiter_id &&
+                        jobLocation.toLowerCase().search(element.formattedLocationFull.toLowerCase()) > -1 &&
                         (element.summary.toLowerCase().search(userHeadline.toLowerCase()) > -1 || element.jobtitle.toLowerCase().search(userHeadline.toLowerCase()) > -1)) {
                         return element
                     }
@@ -124,7 +124,7 @@ angular.module('dash.controllers', [])
 
             SaveJobs.populateJobs(function(job) {
             $scope.savedJobsFrontPage = job.data.jobs_saved || [];
-               
+
             });
         }
 
@@ -133,21 +133,21 @@ angular.module('dash.controllers', [])
 //generating cover letter for auto reply to jobs
       $scope.generateCoverLetter = function(index){
         var today = new Date().getFullYear();
-        $scope.contact_info_for_job = false; 
+        $scope.contact_info_for_job = false;
 
         console.log($scope.savedJobsFrontPage[index].contact_information)
 
             if($scope.savedJobsFrontPage[index].contact_information){
-                $scope.contact_info_for_job = true; 
+                $scope.contact_info_for_job = true;
             }
 
             console.log($scope.contact_info_for_job)
             if($scope.user.jobsought === undefined){
                 var field = $scope.user.linkedin.positions.values[0].title
             }
-        
 
-        $scope.autoApplyEmail = "To Whom it may Concern, \n\nI read with interest your posting for "+ $scope.savedJobsFrontPage[index].jobtitle+" on indeed.com.\n\nI believe I possess the necessary skills and experience you are seeking\nand would make a valuable addition to " + $scope.savedJobsFrontPage[index].company + "\n\nAs my resume indicates, I possess more than " + (today - $scope.user.linkedin.positions.values[0].startDate.year) + " years of progressive\nexperience in the " + field + " field. \n\n" + "My professional history includes positions such as " + $scope.user.linkedin.positions.values[1].title + " at " + $scope.user.linkedin.positions.values[1].company.name + ",\nas well as" + $scope.user.linkedin.positions.values[2].title + " at " + $scope.user.linkedin.positions.values[2].company.name + "." + "\n\nMost recently, my responsibilities as " + $scope.user.linkedin.positions.values[0].title + " at " + $scope.user.linkedin.positions.values[0].company.name + " match the qualifications you are seeking.\n\nAs the" + $scope.user.linkedin.positions.values[0].title + ", my responsibilities included " + $scope.user.linkedin.positions.values[0].summary + "\n\nMy colleagues also relied on my skills in " + $scope.user.linkedin.skills.values[0].skill.name + ", " + $scope.user.linkedin.skills.values[1].skill.name + ", and " + $scope.user.linkedin.skills.values[2].skill.name + ". \n\nHere is a link to my online resume for your review\n" + "localhost:9000/formal/" + $scope.user._id + "\n\nI look forward to speaking with you further regarding your available position\nand am excited to learn more about " + $scope.savedJobsFrontPage[index].company + "." + "\n\nSincerely, \n" + $scope.user.name; 
+
+        $scope.autoApplyEmail = "To Whom it may Concern, \n\nI read with interest your posting for "+ $scope.savedJobsFrontPage[index].jobtitle+" on indeed.com.\n\nI believe I possess the necessary skills and experience you are seeking\nand would make a valuable addition to " + $scope.savedJobsFrontPage[index].company + "\n\nAs my resume indicates, I possess more than " + (today - $scope.user.linkedin.positions.values[0].startDate.year) + " years of progressive\nexperience in the " + field + " field. \n\n" + "My professional history includes positions such as " + $scope.user.linkedin.positions.values[1].title + " at " + $scope.user.linkedin.positions.values[1].company.name + ",\nas well as" + $scope.user.linkedin.positions.values[2].title + " at " + $scope.user.linkedin.positions.values[2].company.name + "." + "\n\nMost recently, my responsibilities as " + $scope.user.linkedin.positions.values[0].title + " at " + $scope.user.linkedin.positions.values[0].company.name + " match the qualifications you are seeking.\n\nAs the" + $scope.user.linkedin.positions.values[0].title + ", my responsibilities included " + $scope.user.linkedin.positions.values[0].summary + "\n\nMy colleagues also relied on my skills in " + $scope.user.linkedin.skills.values[0].skill.name + ", " + $scope.user.linkedin.skills.values[1].skill.name + ", and " + $scope.user.linkedin.skills.values[2].skill.name + ". \n\nHere is a link to my online resume for your review\n" + "localhost:9000/formal/" + $scope.user._id + "\n\nI look forward to speaking with you further regarding your available position\nand am excited to learn more about " + $scope.savedJobsFrontPage[index].company + "." + "\n\nSincerely, \n" + $scope.user.name;
         $scope.encodedEmail =  encodeURIComponent($scope.autoApplyEmail)
 
       }
