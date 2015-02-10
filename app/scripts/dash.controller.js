@@ -47,7 +47,7 @@ angular.module('dash.controllers', [])
             $scope.searchDone = false;
             $scope.user.jobUserLookingFor = headline;
             $scope.user.locationUserWantsToWorkIn = location;
-            userPreferences.savePreferences($scope.user);
+            userPreferences.savePreferences($scope.user, {location:location, headline:headline});
             $scope.getRecruiterJobs($scope.user.jobUserLookingFor, $scope.user.locationUserWantsToWorkIn);
 
 
@@ -70,9 +70,9 @@ angular.module('dash.controllers', [])
             }
             // automatically fills in the job the user is searching for and location
             //based on linkedin profile or updated preferences.
-        $scope.userHeadline = $scope.user.jobUserLookingFor || $scope.user.linkedin.positions.values[0].title;
+        $scope.userHeadline = $scope.user.jobUserLookingFor || $scope.user.linkedin.positions.values[0].title || "intern";
         $scope.locationCutter = function() {
-            $scope.jobLocation = $scope.user.locationUserWantsToWorkIn || $scope.user.linkedin.location.name
+            $scope.jobLocation = $scope.user.locationUserWantsToWorkIn || $scope.user.linkedin.location.name || "new york";
             if ($scope.jobLocation.toLowerCase().search('greater') !== -1) {
                 $scope.jobLocation = $scope.user.linkedin.location.name.toLowerCase().replace('greater', '')
                 $scope.jobLocation = $scope.jobLocation.replace('area', '')
@@ -168,12 +168,11 @@ angular.module('dash.controllers', [])
                         // toast('Job Passed :(', 3000)
                     }
                     if ($scope.numberOfRecruiterJobs == 1) {
-                        $scope.getJobs($scope.userHeadline, $scope.jobLocation);
+                        $scope.getJobs($scope.user.jobUserLookingFor || $scope.userHeadline, $scope.user.locationUserWantsToWorkIn || $scope.jobLocation);
                     }
                     $scope.numberOfRecruiterJobs -= 1;
                 }
             } else {
-                //$scope.currentJob += 1;
                 $scope.jobsSeen += 1;
                 if ($scope.jobsSeen == $scope.totalResults) {
                     $scope.searchDone = true;
@@ -182,7 +181,7 @@ angular.module('dash.controllers', [])
                     if ($scope.jobsSeen < $scope.totalResults) {
                         $scope.page += 1;
                         $scope.currentJob = 0;
-                        indeedapi.getIndeedJobs($scope.user.jobUserLookingFor, $scope.user.locationUserWantsToWorkIn, 25 * $scope.page);
+                        indeedapi.getIndeedJobs($scope.user.jobUserLookingFor || $scope.userHeadline, $scope.user.locationUserWantsToWorkIn || $scope.jobLocation, 25 * $scope.page);
                     }
                 }
                 if (status == 'save') {
