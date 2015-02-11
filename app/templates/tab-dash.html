@@ -7,32 +7,35 @@
           <div class="image" ng-hide="flip">
           <div class="card">
             <div class="item item-divider">
-             <center><h2>{{job.jobtitle}}</h2></center>
+             <center><h2 style="color: #499EC9;">{{job.jobtitle}} <br> At {{job.company}}</h2></center>
             </div>
-            <div class="item item-text-wrap">
-             <center><p>Posted {{job.formattedRelativeTime}}</p></center>
-              <center><p> in {{job.formattedLocationFull}} </p></center>
-             <center><p>by {{job.company}}</p></center>
+            <div class="item item-text-wrap" style="padding-top: 3px; padding-bottom: 3px;">
+            <center><p style= "font-style: italic;">{{job.formattedLocationFull}} </p></center>
             </div>
           </div>
-          <div class="item item-body">
+          <div class="item item-body" style= "border-width: 0px; margin-top: -15px; padding-bottom:0px">
           <img class = "full-image" src= "http://indeed.com/{{job.logo}}" onerror='this.onerror = null; this.src="http://www.mrwallpaper.com/wallpapers/Dragon-Rider.jpg"'>
-            <div class="no-text">NOPE</div>
-            <p>{{job.snippet}}</p>
-            <div class="yes-text">SAVE</div>
+            <strong><p style="color: #499EC9; margin-bottom: 0px; margin-top: 10px; font-style: italic;">Description - </p></strong>
+            <p style=" margin-top: 0px;">{{job.snippet}}</p>
+            <p style= "font-style: italic; text-align:right">Posted {{job.formattedRelativeTime}}</p>
+            <div class="yes-text" style = "top: 90px;">&nbsp&nbspSAVE</div>
+            <div class="no-text" style = "top: 60px;">NOPE</div>
           </div>
         </div>
 
-          <div class="image" ng-show="flip">
+          <div class="image" ng-show="flip" style="margin-bottom:-20px">
           <div class="card">
             <div class="item item-divider">
-             <center><h2>{{job.jobtitle}}</h2></center>
+             <center><h2 style="color: #499EC9;">{{job.jobtitle}} <br> At {{job.company}}</h2></center>
             </div>
              <div class="item item-body">
                 <div class="no-text">NOPE</div>
+
                 <p>{{job.summary}}...</p>          
                 <div class="yes-text">SAVE</div>
+                <center>
                 <a href = "{{job.url}}" target = '_blank'><button class="button icon-left ion-star button-positive" >View Full Post</button></a>
+              </center>
             </div>
           </div>
          </div>

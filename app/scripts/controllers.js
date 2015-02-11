@@ -6,7 +6,10 @@ angular.module('starter.controllers', [])
 //  })
 // })
 
-.controller('LoginCtrl', function($scope, $window, $rootScope) {
+.controller('LoginCtrl', function($scope, $window, $rootScope, $ionicSlideBoxDelegate) {
+    $scope.nextSlide = function() {
+    $ionicSlideBoxDelegate.next();
+  }
    $scope.loginOauth = function(provider) {
       
       $window.location.href = 'http://localhost:9000/auth/' + provider;
