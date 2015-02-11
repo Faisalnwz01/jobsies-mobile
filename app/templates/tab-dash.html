@@ -1,5 +1,30 @@
 <ion-view view-title="Jobs Page">
-  <ion-content class="padding">  
+<div class="bar bar-header bar-positive">
+    <button class="button icon ion-ios7-search button-clear" ng-click="openModal()"></button>
+     <h1 class="title">bar-positive</h1>
+</div>
+  <ion-content class="padding" style="top: 100px;">  
+  <script id="my-modal.html" type="text/ng-template">
+  <ion-modal-view>
+    <ion-header-bar>
+      <h1 class="title">Update Search Preferences</h1>
+    </ion-header-bar>
+    <ion-content>
+<form>
+   <label class="item item-input">
+    <input ng-model="headline" type="text" placeholder="Job Title or Skill">
+  </label>
+  <label class="item item-input">
+    <input ng-model="location" type="text" placeholder="City">
+  </label>
+
+<button class="button button-block button-positive" ng-click="updateJob(headline, location)">
+Update Search Preferences
+</button>
+</form>
+    </ion-content>
+  </ion-modal-view>
+</script>
 
   <div ng-show="loading">
     <center><h3> Searching for {{user.linkedin.positions.values[0].title}} Jobs in {{user.linkedin.location.name}}</h3></center>
