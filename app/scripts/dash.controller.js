@@ -51,7 +51,10 @@ else{
 
 
          SaveJobs.doHttpUser(function(user) {
+            $scope.loading = true; 
+            console.log($scope.loading)
 
+console.log($scope.user)
                  $scope.user = user
 
 
@@ -108,11 +111,17 @@ else{
                 if(jobs.jobArray.length == 0 && jobs.totalResults > 0){
                     $scope.page +=1;
                     $scope.getJobs(headline, location, (start+25))
+                    $scope.loading = false; 
+                    console.log($scope.jobsArray)
+                    console.log($scope.loading)
                 }
                 else {
                     $scope.currentJob = 0;
                     $scope.jobArray = jobs.jobArray;
                     $scope.totalResults = jobs.totalResults;
+                    $scope.loading = false;
+                console.log($scope.jobArray)
+                console.log($scope.loading)
                 }
             })
         };
