@@ -6,6 +6,7 @@ angular.module('starter.controllers')
             getIndeedJobs: function(query, location, start) {
                 return new $q(function(resolve, reject) {
                     $http.get('http://localhost:9000/api/users/mobile/' + $stateParams.id).then(function(getUser) {
+                        var user_info = getUser.data._id;
                         if (location.indexOf(",") > -1) {
                             var new_location = location.split(",")[0];
                         } else {
@@ -18,37 +19,17 @@ angular.module('starter.controllers')
                                     query: query,
                                     city: new_location,
                                     state: state,
-                                    start: start
+                                    start: start,
+                                    user_info: user_info
                                 })
                                     .then(function(search_response) {
 
-                                        $http.get('http://localhost:9000/api/users/'+getUser.data._id+'/jobPopulate').then(function(user){
-                                        var savedJobs = user.data.jobs_saved;
-                                        var savedJobKeys = [];
-                                        for (var j=0; j<savedJobs.length; j++) {
-                                            savedJobKeys.push(savedJobs[j].jobkey)
-                                        }
-                                        var jobArray = [];
-                                        for (var i=0; i<search_response.data.results.length; i++){
-                                            if (savedJobKeys.indexOf(search_response.data.results[i].jobkey) === -1) {
-                                                jobArray.push(search_response.data.results[i])
-                                            }
-                                        }
-                                        var totalResults = search_response.data.totalResults;
-                                        $http.post('http://localhost:9000/api/jobs/cheerio', jobArray)
-                                            .success(function(results) {
-                                                jobArray = results;
-                                                resolve({
-                                                    jobArray: jobArray,
-                                                    totalResults: totalResults
-                                                })
-                                            })
-                                        })    
+                                        resolve(search_response) 
 
                                     })//.then indeed search response
                             })
 
-                    })///get user id
+                        })///get user id
 
                 })///return new q
 

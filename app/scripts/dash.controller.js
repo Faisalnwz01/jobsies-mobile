@@ -73,16 +73,10 @@ console.log($scope.user)
             $scope.user.jobUserLookingFor = headline;
             $scope.user.locationUserWantsToWorkIn = location;
             userPreferences.savePreferences($scope.user, {location:location, headline:headline});
+            $scope.jobArray = [];
+            $scope.loading = true;
             $scope.getRecruiterJobs($scope.user.jobUserLookingFor, $scope.user.locationUserWantsToWorkIn);
             $scope.modal.hide();
-
-
-            // var getJobs = indeedapi.getIndeedJobs(headline, location, 0)
-            // getJobs.then(function(jobs) {
-            //     $scope.jobArray = jobs.jobArray;
-            //     $scope.totalResults = jobs.totalResults;
-            //     userPreferences.savePreferences($scope.user)
-            // })
         }
 
 
@@ -108,21 +102,9 @@ console.log($scope.user)
         //gets  jobs from the indeed api to display on the home page.
         $scope.getJobs = function(headline, location, start) {
             indeedapi.getIndeedJobs(headline, location, start||0).then(function(jobs) {
-                if(jobs.jobArray.length == 0 && jobs.totalResults > 0){
-                    $scope.page +=1;
-                    $scope.getJobs(headline, location, (start+12))
-                    $scope.loading = false; 
-                    console.log($scope.jobsArray)
-                    console.log($scope.loading)
-                }
-                else {
-                    $scope.currentJob = 0;
-                    $scope.jobArray = jobs.jobArray;
-                    $scope.totalResults = jobs.totalResults;
-                    $scope.loading = false;
-                console.log($scope.jobArray)
-                console.log($scope.loading)
-                }
+                console.log(jobs.data)
+                $scope.loading = false;
+                $scope.jobArray = jobs.data;
             })
         };
 
@@ -140,8 +122,9 @@ console.log($scope.user)
                 })
                 $scope.numberOfRecruiterJobs = jobsies.length;
                 $scope.jobArray = jobsies;
-
+                $scope.loading = false;
                 if ($scope.jobArray.length == 0) {
+                    $scope.loading = true;
                     $scope.getJobs(userHeadline, jobLocation)
                 }
             })
@@ -210,15 +193,11 @@ console.log($scope.user)
                 }
             } else {
                 $scope.jobsSeen += 1;
-                if ($scope.jobsSeen == $scope.totalResults) {
-                    $scope.searchDone = true;
-                }
-                if ($scope.currentJob === $scope.jobArray.length) {
-                    if ($scope.jobsSeen < $scope.totalResults) {
-                        $scope.page += 1;
-                        $scope.currentJob = 0;
-                        $scope.getJobs($scope.user.jobUserLookingFor || $scope.userHeadline, $scope.user.locationUserWantsToWorkIn || $scope.jobLocation, 12 * $scope.page);
-                    }
+                if($scope.currentJob == $scope.jobArray.length){
+                    $scope.currentJob = 0;
+                    $scope.jobArray = [];
+                    $scope.loading = true;
+                    $scope.getJobs($scope.user.jobUserLookingFor||$scope.userHeadline, $scope.user.locationUserWantsToWorkIn||$scope.jobLocation, $scope.jobsSeen + 12)
                 }
                 if (status == 'save') {
                     // toast('Job Saved!! :)', 3000)
