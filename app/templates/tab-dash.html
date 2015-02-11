@@ -1,5 +1,13 @@
 <ion-view view-title="Jobs Page">
   <ion-content class="padding">  
+
+  <div ng-show="loading">
+    <center><h3> Searching for {{user.linkedin.positions.values[0].title}} Jobs in {{user.linkedin.location.name}}</h3></center>
+      <img style="width: 95%;" src = '/images/loading.gif'>
+
+  </div>
+
+  <div ng-show="!loading">
 <td-cards>
 
         <td-card ng-repeat="job in jobArray" on-swipe-left="saveOrPass('pass', job)"  on-swipe-right="saveOrPass('save', job)" on-partial-swipe="cardPartialSwipe(amt)" ng-show="$index===currentJob" class="card-{{$index}}" ng-click="flipCard()">
@@ -42,5 +50,7 @@
            
         </td-card>
       </td-cards>
+
+      </div>
   </ion-content>
 </ion-view>
