@@ -52,23 +52,24 @@ td-card img {
 .yes-text {
   position: absolute;
   right: 10px;
-  font-size: 50px;
+  font-size: 80px;
   color: rgb(111, 250, 111);
   opacity: 0;
   text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
-   -webkit-transform: rotate(-20deg); 
-   transform: rotate(-20deg);
-
+  -webkit-transform: rotate(35deg); 
+  transform: rotate(35deg);
 }
 .no-text {
   position: absolute;
   left: 10px;
-  font-size: 50px;
+  font-size: 80px;
   color: rgb(255, 115, 115);
   opacity: 0;
-    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
-  -webkit-transform: rotate(20deg); 
-  transform: rotate(20deg);
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+   /* Rotate div */
+   -webkit-transform: rotate(-35deg); 
+   transform: rotate(-35deg);
+
  
 }
 
