@@ -124,18 +124,24 @@ else{
         };
 
         $scope.getRecruiterJobs($scope.userHeadline, $scope.jobLocation);
-
         //fills in the right sidebar with jobs that a user has previously saved
+
+        //  $scope.getSavedJobsies = function() {
+        //     $scope.savedJobsFrontPage = []
+        //     SaveJobs.populateJobs().then(function(jobs) {
+        //         $scope.savedJobsFrontPage = jobs.data.jobs_saved || [];
+        //     })
+        // }
         $scope.getSavedJobsies = function() {
             $scope.savedJobsFrontPage = []
             // SaveJobs.populateJobs().then(function(jobs) {
             //     $scope.savedJobsFrontPage = jobs.data.jobs_saved || [];
             //     console.log($scope.savedJobsFrontPage)
             // })
-
             SaveJobs.populateJobs(function(job) {
+              console.log("job save testing", job)
             $scope.savedJobsFrontPage = job.data.jobs_saved || [];
-
+              console.log($scope.savedJobsFrontPage, 'saved jobs front page')
             });
         }
 
@@ -215,7 +221,8 @@ else{
         }
 
         $scope.removeJobFromUser = function(job) {
-            SaveJobs.removeJobFromUser(job, $scope.user).then(function() {
+            SaveJobs.removeJobFromUser(job, $scope.user)
+            .then(function() {
                 $scope.getSavedJobsies();
             })
         }
