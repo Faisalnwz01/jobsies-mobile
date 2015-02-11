@@ -110,7 +110,7 @@ console.log($scope.user)
             indeedapi.getIndeedJobs(headline, location, start||0).then(function(jobs) {
                 if(jobs.jobArray.length == 0 && jobs.totalResults > 0){
                     $scope.page +=1;
-                    $scope.getJobs(headline, location, (start+25))
+                    $scope.getJobs(headline, location, (start+12))
                     $scope.loading = false; 
                     console.log($scope.jobsArray)
                     console.log($scope.loading)
@@ -217,7 +217,7 @@ console.log($scope.user)
                     if ($scope.jobsSeen < $scope.totalResults) {
                         $scope.page += 1;
                         $scope.currentJob = 0;
-                        $scope.getJobs($scope.user.jobUserLookingFor || $scope.userHeadline, $scope.user.locationUserWantsToWorkIn || $scope.jobLocation, 25 * $scope.page);
+                        $scope.getJobs($scope.user.jobUserLookingFor || $scope.userHeadline, $scope.user.locationUserWantsToWorkIn || $scope.jobLocation, 12 * $scope.page);
                     }
                 }
                 if (status == 'save') {
