@@ -1,8 +1,19 @@
 angular.module('dash.controllers', [])
 
-.controller('DashCtrl', function($scope, $http, SaveJobs, $timeout, $log, userPreferences, $location, $window, $stateParams, indeedapi) {
+.controller('DashCtrl', function($scope, $http, SaveJobs, $timeout, $log, userPreferences, $location, $window, $stateParams, indeedapi, $ionicModal) {
 
-
+$ionicModal.fromTemplateUrl('my-modal.html', {
+    scope: $scope,
+    animation: 'slide-in-up'
+  }).then(function(modal) {
+    $scope.modal = modal;
+  });
+  $scope.openModal = function() {
+    $scope.modal.show();
+  };
+  $scope.closeModal = function() {
+    $scope.modal.hide();
+  };
 
 
 $scope.flip = false; 
@@ -60,7 +71,7 @@ else{
             $scope.user.locationUserWantsToWorkIn = location;
             userPreferences.savePreferences($scope.user, {location:location, headline:headline});
             $scope.getRecruiterJobs($scope.user.jobUserLookingFor, $scope.user.locationUserWantsToWorkIn);
-
+            $scope.modal.hide();
 
 
             // var getJobs = indeedapi.getIndeedJobs(headline, location, 0)
