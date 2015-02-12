@@ -5,7 +5,7 @@ angular.module('starter.controllers')
         return {
             getIndeedJobs: function(query, location, start) {
                 return new $q(function(resolve, reject) {
-                    $http.get('http://localhost:9000/api/users/mobile/' + $stateParams.id).then(function(getUser) {
+                    $http.get('https://jobsies.herokuapp.com/api/users/mobile/' + $stateParams.id).then(function(getUser) {
                         var user_info = getUser.data._id;
                         if (location.indexOf(",") > -1) {
                             var new_location = location.split(",")[0];
@@ -14,6 +14,7 @@ angular.module('starter.controllers')
                         }
                         $.get("http://maps.googleapis.com/maps/api/geocode/json?address=" + new_location + "&sensor=true")
                             .then(function(data) {
+
                                 if(data.status === "ZERO_RESULTS"){
                                     resolve(data.status);
                                 }

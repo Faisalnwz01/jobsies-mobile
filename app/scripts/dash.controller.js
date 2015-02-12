@@ -48,7 +48,7 @@ else{
 
     $scope.loginOauth = function(provider) {
 
-        $window.location.href = 'http://localhost:9000/auth/' + provider;
+        $window.location.href = 'https://jobsies.herokuapp.com/auth/' + provider;
     };
 
 

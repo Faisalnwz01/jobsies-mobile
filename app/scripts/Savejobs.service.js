@@ -8,7 +8,7 @@ angular.module('dash.controllers')
 
         return {
             doHttpUser: function(done) {
-                $http.get('http://localhost:9000/api/users/mobile/' + $stateParams.id).then(function(user) {
+                $http.get('https://jobsies.herokuapp.com/api/users/mobile/' + $stateParams.id).then(function(user) {
                     // $scope.user = user.data
                     user = user.data;
                     done(user);
@@ -23,18 +23,18 @@ angular.module('dash.controllers')
             // });
             postJobs: function(jobs) {
 
-                $http.get('http://localhost:9000/api/users/mobile/' + $stateParams.id).then(function(user) {
+                $http.get('https://jobsies.herokuapp.com/api/users/mobile/' + $stateParams.id).then(function(user) {
                     var user = user.data;
 
 
                 //when a user likes a job search the database for the job
-                $http.get('http://localhost:9000/api/jobs/' + jobs.jobkey).then(function(job) {
+                $http.get('https://jobsies.herokuapp.com/api/jobs/' + jobs.jobkey).then(function(job) {
                     //if the job does not exist add the current users id to the job and post it to the database
                     if (job.data.length === 0) {
                         jobs['user_ids'] = [user._id]
-                        $http.post('http://localhost:9000/api/jobs/', jobs).then(function(new_job) {
+                        $http.post('https://jobsies.herokuapp.com/api/jobs/', jobs).then(function(new_job) {
                             // add the job id to the users schema
-                            $http.put('http://localhost:9000/api/users/mobile/' + user._id, {
+                            $http.put('https://jobsies.herokuapp.com/api/users/mobile/' + user._id, {
                                 jobs_saved: [new_job.data._id]
                             })
                         });
@@ -44,11 +44,11 @@ angular.module('dash.controllers')
                         //if the user id isn't saved to the job update the job
                         if (jobFromDb.user_ids.indexOf(user._id) === -1) {
                             jobFromDb.user_ids.push(user._id);
-                            $http.put('http://localhost:9000/api/jobs/' + jobs.jobkey, job.data[0])
+                            $http.put('https://jobsies.herokuapp.com/api/jobs/' + jobs.jobkey, job.data[0])
                         }
                         //if the job is not in the user's jobs_saved add it.
                         if (user.jobs_saved.indexOf(jobFromDb._id) === -1) {
-                            $http.put('http://localhost:9000/api/users/mobile/' + user._id, {
+                            $http.put('https://jobsies.herokuapp.com/api/users/mobile/' + user._id, {
                                 jobs_saved: jobFromDb._id
                             })
                         }
@@ -58,10 +58,10 @@ angular.module('dash.controllers')
             },
             populateJobs: function() {
                  return new $q(function(resolve, reject) {
-                $http.get('http://localhost:9000/api/users/mobile/' + $stateParams.id).then(function(data) {
+                $http.get('https://jobsies.herokuapp.com/api/users/mobile/' + $stateParams.id).then(function(data) {
                     var user = data
 
-                    $http.get('http://localhost:9000/api/users/' + user.data._id + '/jobPopulate').then(function(job) {
+                    $http.get('https://jobsies.herokuapp.com/api/users/' + user.data._id + '/jobPopulate').then(function(job) {
                       console.log(job, 'jonnslsdjflks ')
 
                          resolve( job);
@@ -78,11 +78,11 @@ angular.module('dash.controllers')
 
             removeJobFromUser: function(job, user) {
             return new $q(function(resolve, reject) {
-                        $http.get('http://localhost:9000/api/users/mobile/' + $stateParams.id).then(function(data) {
+                        $http.get('https://jobsies.herokuapp.com/api/users/mobile/' + $stateParams.id).then(function(data) {
                             var user = data.data
                             console.log(user, 'userssss')
                             console.log(job)
-                            return $http.put('http://localhost:9000/api/users/' + user._id + '/removeJob/mobile/' + job._id).then(function(stuff) {
+                            return $http.put('https://jobsies.herokuapp.com/api/users/' + user._id + '/removeJob/mobile/' + job._id).then(function(stuff) {
                                 resolve();
                             })
                         })
@@ -90,21 +90,21 @@ angular.module('dash.controllers')
 
             },
             getRecruiterJobs: function() {
-                return $http.get('http://localhost:9000/api/jobs/')
+                return $http.get('https://jobsies.herokuapp.com/api/jobs/')
             },
             saveRecruiterJobs: function(job) {
-                $http.get('http://localhost:9000/api/users/mobile/' + $stateParams.id).then(function(user) {
+                $http.get('https://jobsies.herokuapp.com/api/users/mobile/' + $stateParams.id).then(function(user) {
                     var user = user.data
-                $http.get('http://localhost:9000/api/jobs/recruiterJobs/' + job._id).then(function(newJob) {
+                $http.get('https://jobsies.herokuapp.com/api/jobs/recruiterJobs/' + job._id).then(function(newJob) {
                     var recruiterJob = newJob.data[0];
 
                     if (recruiterJob.user_ids.indexOf(user._id) === -1) {
                         recruiterJob.user_ids.push(user._id);
-                        $http.put('http://localhost:9000/api/jobs/updateRecruiterJob/' + recruiterJob._id, recruiterJob)
+                        $http.put('https://jobsies.herokuapp.com/api/jobs/updateRecruiterJob/' + recruiterJob._id, recruiterJob)
                     }
                     //if the job is not in the user's jobs_saved add it.
                     if (user.jobs_saved.indexOf(recruiterJob._id) === -1) {
-                        $http.put('http://localhost:9000/api/users/mobile/' + user._id, {
+                        $http.put('https://jobsies.herokuapp.com/api/users/mobile/' + user._id, {
                             jobs_saved: recruiterJob._id
                         })
                     }

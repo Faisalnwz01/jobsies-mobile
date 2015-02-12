@@ -97,7 +97,7 @@ angular.module('starter.services', [])
 // .factory('User', function($resource, $stateParams, $http) {
 //     return {
 //       get: function() {
-//         return $http.get('http://localhost:9000/api/users/mobile/' + $stateParams.id)
+//         return $http.get('https://jobsies.herokuapp.com/api/users/mobile/' + $stateParams.id)
 //       }
 //     }
 //   });
