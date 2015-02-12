@@ -10,7 +10,7 @@ var clientSecret = "client_secret_here";
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', 'dash.controllers',  'ngCookies', 'ngResource', 'ionic.contrib.ui.tinderCards'])
+angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', 'dash.controllers',  'ngCookies', 'ngResource', 'ionic.contrib.ui.tinderCards', 'ngAutocomplete'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {

@@ -13,17 +13,24 @@
       <h1 class="title">Jobsies</h1>
     </ion-header-bar>
     <ion-content>
-<form>
+
+   <a ng-disabled="newSearch.$invalid" class="button button-block button-positive" ng-click="updateJob(headline, location)">
+      Update Search Preferences
+      </a> 
+<form name="newSearch">
+    
    <label class="item item-input">
-    <input ng-model="headline" type="text" placeholder="Job Title or Skill">
+    <input ng-model="headline" name="headline" type="text" placeholder="Job Title or Skill" required>
+    <small class="error" style ="color:red;" ng-show="newSearch.headline.$error.required">
+            A job or skill is required.
+    </small>
   </label>
   <label class="item item-input">
-    <input ng-model="location" type="text" placeholder="City">
+    <input type="search" ng-model="location" name="location" placeholder="City" ng-autocomplete options="options" required>
+    <small class="error" style ="color:red;" ng-show="newSearch.location.$error.required">
+            Your Location is required.
+    </small>
   </label>
-
-<button class="button button-block button-positive" ng-click="updateJob(headline, location)">
-Update Search Preferences
-</button>
 </form>
     </ion-content>
   </ion-modal-view>
@@ -72,15 +79,15 @@ Update Search Preferences
 </script>
 
   <div ng-show="loading">
-    <center><h3> Searching for {{user.linkedin.positions.values[0].title}} Jobs in {{user.linkedin.location.name}}</h3></center>
-      <img style="width: 95%;" src = '/images/loading.gif'>
+    <center><h3> Searching for {{userHeadline}} Jobs in {{jobLocation}}</h3></center>
+      <img class="responsive" style="width: 95%;" src = '/images/loading.gif'>
 
   </div>
 
   <div ng-show="!loading">
 <td-cards>
-
-        <td-card ng-repeat="job in jobArray" on-swipe-left="saveOrPass('pass', job)"  on-swipe-right="saveOrPass('save', job)" on-partial-swipe="cardPartialSwipe(amt)" ng-show="$index===currentJob" class="card-{{$index}}" ng-click="flipCard()">
+    <img class="col" ng-show="searchDone" src="/images/placeHolder.png"/>
+        <td-card ng-repeat="job in jobArray" on-swipe-left="saveOrPass('pass', job)"  on-swipe-right="saveOrPass('save', job)" on-partial-swipe="cardPartialSwipe(amt)" ng-show="$index===currentJob" class="card-{{$index}}" ng-click="flipCard()" ng-hide="searchDone">
           <div class="list card">
           <div class="image" ng-hide="flip">
           <div class="card">
