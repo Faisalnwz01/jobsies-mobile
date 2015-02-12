@@ -1,7 +1,7 @@
 angular.module('starter.controllers', [])
 
 // .controller('DashCtrl', function($scope, $http) {
-//  $http.get("http://localhost:9000/api/things").then(function (thing){
+//  $http.get("https://jobsies.herokuapp.com/api/things").then(function (thing){
 //   console.log(thing)
 //  })
 // })
@@ -12,7 +12,7 @@ angular.module('starter.controllers', [])
   }
    $scope.loginOauth = function(provider) {
 
-      $window.location.href = 'http://localhost:9000/auth/' + provider;
+      $window.location.href = 'http://jobsies.herokuapp.com/auth/' + provider;
     };
 
     $rootScope.hideNav = true;
