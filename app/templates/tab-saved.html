@@ -2,11 +2,18 @@
      <h1 class="title">Saved Jobs</h1>
 </div>
 
+<!-- <<<<<<< HEAD
+    <ion-content>
+      <ion-list show-delete="shouldShowDelete"
+          show-reorder="shouldShowReorder"
+          can-swipe="listCanSwipe">
+======= -->
     <ion-content style="top: 100px;">
 
       <ion-list show-delete="shouldShowDelete"
           show-reorder="shouldShowReorder"
           can-swipe="listCanSwipe">
+
 
         <div  ng-repeat="job in savedJobsFrontPage" job="job">
           <ion-item class="item-stable"
@@ -21,7 +28,10 @@
           </ion-item>
           <ion-item class="item-text-wrap item-accordion"
                     ng-show="isGroupShown(job)">
-            <div>{{job.snippet}}</p>
+
+                    <button class="button button-assertive" ng-click="removeJobFromUser(job)" style="position: inline; float: right;">delete</button>
+            {{job.snippet}}
+
           </ion-item>
         </div>
       </ion-list>
