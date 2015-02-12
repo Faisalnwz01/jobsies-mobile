@@ -19,9 +19,9 @@
             <p>Company: {{job.company}}</p>
             <p>Location: {{job.formattedLocationFull}}</p>
           </ion-item>
-          <ion-item class="item-accordion"
+          <ion-item class="item-text-wrap item-accordion"
                     ng-show="isGroupShown(job)">
-            {{job.snippet}}
+            <div>{{job.snippet}}</p>
           </ion-item>
         </div>
       </ion-list>
