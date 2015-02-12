@@ -73,7 +73,7 @@
         </div>
       </ion-list>
 
-    </ion-content>
+    </ion-content style="margin-bottom: 100px;">
 
   </ion-modal-view>
 </script>
@@ -87,7 +87,7 @@
   <div ng-show="!loading">
 <td-cards>
     <img class="col" ng-show="searchDone" src="/images/placeHolder.png"/>
-        <td-card ng-repeat="job in jobArray" on-swipe-left="saveOrPass('pass', job)"  on-swipe-right="saveOrPass('save', job)" on-partial-swipe="cardPartialSwipe(amt)" ng-show="$index===currentJob" class="card-{{$index}}" ng-click="flipCard()" ng-hide="searchDone">
+        <td-card ng-repeat="job in jobArray" on-swipe-left="saveOrPass('pass', job)"  on-swipe-right="saveOrPass('save', job)" on-partial-swipe="cardPartialSwipe(amt)" ng-show="$index===currentJob" class="card-{{$index}}" ng-click="flipCard()">
           <div class="list card">
           <div class="image" ng-hide="flip">
           <div class="card">
