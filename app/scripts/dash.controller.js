@@ -88,6 +88,8 @@ console.log($scope.user)
             $scope.searchDone = false;
             $scope.user.jobUserLookingFor = headline;
             $scope.user.locationUserWantsToWorkIn = location;
+            $scope.userHeadline = headline;
+            $scope.jobLocation = location;
             userPreferences.savePreferences($scope.user, {location:location, headline:headline});
             $scope.jobArray = [];
             $scope.loading = true;
@@ -121,6 +123,9 @@ console.log($scope.user)
                 console.log(jobs.data)
                 $scope.loading = false;
                 $scope.jobArray = jobs.data;
+                if(jobs.data[0].jobtitle == "No More Jobs"){
+                    $scope.searchDone = true;
+               }
             })
         };
 
