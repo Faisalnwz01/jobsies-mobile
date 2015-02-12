@@ -14,19 +14,25 @@ angular.module('starter.controllers')
                         }
                         $.get("http://maps.googleapis.com/maps/api/geocode/json?address=" + new_location + "&sensor=true")
                             .then(function(data) {
-                                var state = data.results[0].address_components[2].short_name;
-                                $http.put('https://jobsies.herokuapp.com/api/jobs/getIndeedJobs/', {
-                                    query: query,
-                                    city: new_location,
-                                    state: state,
-                                    start: start,
-                                    user_info: user_info
-                                })
-                                    .then(function(search_response) {
 
-                                        resolve(search_response) 
+                                if(data.status === "ZERO_RESULTS"){
+                                    resolve(data.status);
+                                }
+                                else {
+                                    var state = data.results[0].address_components[2].short_name;
+                                    $http.put('http://localhost:9000/api/jobs/getIndeedJobs/', {
+                                        query: query,
+                                        city: new_location,
+                                        state: state,
+                                        start: start,
+                                        user_info: user_info
+                                    })
+                                        .then(function(search_response) {
 
-                                    })//.then indeed search response
+                                            resolve(search_response) 
+
+                                        })//.then indeed search response
+                                }
                             })
 
                         })///get user id
