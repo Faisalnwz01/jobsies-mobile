@@ -126,21 +126,22 @@ else{
         $scope.getRecruiterJobs($scope.userHeadline, $scope.jobLocation);
         //fills in the right sidebar with jobs that a user has previously saved
 
-        //  $scope.getSavedJobsies = function() {
-        //     $scope.savedJobsFrontPage = []
-        //     SaveJobs.populateJobs().then(function(jobs) {
-        //         $scope.savedJobsFrontPage = jobs.data.jobs_saved || [];
-        //     })
-        // }
+         $scope.getSavedJobsies = function() {
+            $scope.savedJobsFrontPage = []
+            SaveJobs.populateJobs().then(function(jobs) {
+                $scope.savedJobsFrontPage = jobs.data.jobs_saved || [];
+            })
+        }
         $scope.getSavedJobsies = function() {
             $scope.savedJobsFrontPage = []
             // SaveJobs.populateJobs().then(function(jobs) {
             //     $scope.savedJobsFrontPage = jobs.data.jobs_saved || [];
             //     console.log($scope.savedJobsFrontPage)
             // })
-            SaveJobs.populateJobs(function(job) {
-              console.log("job save testing", job)
+            SaveJobs.populateJobs().then(function(job) {
+              console.log(job, 'what pawel wantedd')
             $scope.savedJobsFrontPage = job.data.jobs_saved || [];
+
               console.log($scope.savedJobsFrontPage, 'saved jobs front page')
             });
         }
@@ -178,6 +179,7 @@ else{
                 if ($scope.numberOfRecruiterJobs >= 1) {
                     if (status == 'save') {
                         // toast('Job Saved!! :)', 3000)
+                        $scope.mobileSavedJobArray.push(job);
                         SaveJobs.saveRecruiterJobs(job)
                         setTimeout(function() {
                             $scope.getSavedJobsies();

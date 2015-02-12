@@ -44,7 +44,7 @@ angular.module('dash.controllers')
                         //if the user id isn't saved to the job update the job
                         if (jobFromDb.user_ids.indexOf(user._id) === -1) {
                             jobFromDb.user_ids.push(user._id);
-                            $http.put('http://localhost:9000/api/jobs//' + jobs.jobkey, job.data[0])
+                            $http.put('http://localhost:9000/api/jobs/' + jobs.jobkey, job.data[0])
                         }
                         //if the job is not in the user's jobs_saved add it.
                         if (user.jobs_saved.indexOf(jobFromDb._id) === -1) {
@@ -56,18 +56,19 @@ angular.module('dash.controllers')
                 })
 })
             },
-            populateJobs: function(whatever) {
-
+            populateJobs: function() {
+                 return new $q(function(resolve, reject) {
                 $http.get('http://localhost:9000/api/users/mobile/' + $stateParams.id).then(function(data) {
                     var user = data
 
                     $http.get('http://localhost:9000/api/users/' + user.data._id + '/jobPopulate').then(function(job) {
-                      console.log(job, 'factory job')
-                        whatever(job);
+                      console.log(job, 'jonnslsdjflks ')
+
+                         resolve( job);
                     });
                })
 
-
+})
 
             },
 
@@ -96,7 +97,7 @@ angular.module('dash.controllers')
                     var user = user.data
                 $http.get('http://localhost:9000/api/jobs/recruiterJobs/' + job._id).then(function(newJob) {
                     var recruiterJob = newJob.data[0];
-                    console.log(recruiterJob, "recruiter job")
+
                     if (recruiterJob.user_ids.indexOf(user._id) === -1) {
                         recruiterJob.user_ids.push(user._id);
                         $http.put('http://localhost:9000/api/jobs/updateRecruiterJob/' + recruiterJob._id, recruiterJob)

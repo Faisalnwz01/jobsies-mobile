@@ -8,14 +8,20 @@ angular.module('starter.controllers', [])
 
 .controller('LoginCtrl', function($scope, $window, $rootScope) {
    $scope.loginOauth = function(provider) {
-      
+
       $window.location.href = 'http://localhost:9000/auth/' + provider;
     };
 
-    $rootScope.hideNav = true; 
-    console.log($scope.hideNav)
+    $rootScope.hideNav = true;
 
 })
+// .controller('SavedCtrl', function ($scope, SaveJobs) {
+//   SaveJobs.populateJobs().then(function (data) {
+//     console.log(data, 'dataaaaaa')
+//     $scope.savedJobs = data.data.jobs_saved
+//   })
+
+// })
 
 .controller('ChatDetailCtrl', function($scope, $stateParams, Chats) {
   $scope.chat = Chats.get($stateParams.chatId);

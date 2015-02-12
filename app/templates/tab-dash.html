@@ -3,13 +3,13 @@
 
 
 
-    
+
 <td-cards>
         <td-card ng-repeat="job in jobArray" on-swipe-left="saveOrPass('pass', job)"  on-swipe-right="saveOrPass('save', job)" on-partial-swipe="cardPartialSwipe(amt)" ng-show="$index===currentJob" class="card-{{$index}}">
 <div class="flip-container" ng-click = "flipCard()">
   <div class="flipper">
     <div class="{{cardClass}}">
-      
+
 
           <div class="image">
             <center>
@@ -26,7 +26,7 @@
 
 
       <div class="back">
-      fuck you 
+      fuck you
     </div>
       </div>
 
@@ -34,7 +34,7 @@
 </div>
         </td-card>
       </td-cards>
-   
-    
+
+
   </ion-content>
 </ion-view>
