@@ -1,14 +1,29 @@
 angular.module('dash.controllers', [])
 
-.controller('DashCtrl', function($scope, $http, SaveJobs, $timeout, $log, userPreferences, $location, $window, $stateParams, indeedapi) {
+.controller('DashCtrl', function($scope, $http, SaveJobs, $timeout, $log, userPreferences, $location, $window, $stateParams, indeedapi, $ionicModal) {
 
-$scope.cardClass = "front";
+$ionicModal.fromTemplateUrl('my-modal.html', {
+    scope: $scope,
+    animation: 'slide-in-up'
+  }).then(function(modal) {
+    $scope.modal = modal;
+  });
+  $scope.openModal = function() {
+    $scope.modal.show();
+  };
+  $scope.closeModal = function() {
+    $scope.modal.hide();
+  };
+
+
+$scope.flip = false; 
+
 $scope.flipCard = function(){
-    if($scope.cardClass === "front"){
-    $scope.cardClass = "back"
+    if($scope.flip === false){
+    $scope.flip = true
 }
 else{
-    $scope.cardClass = 'front'
+    $scope.flip = false
 }
 
 
@@ -36,7 +51,10 @@ else{
 
 
          SaveJobs.doHttpUser(function(user) {
+            $scope.loading = true; 
+            console.log($scope.loading)
 
+console.log($scope.user)
                  $scope.user = user
 
 
@@ -55,16 +73,10 @@ else{
             $scope.user.jobUserLookingFor = headline;
             $scope.user.locationUserWantsToWorkIn = location;
             userPreferences.savePreferences($scope.user, {location:location, headline:headline});
+            $scope.jobArray = [];
+            $scope.loading = true;
             $scope.getRecruiterJobs($scope.user.jobUserLookingFor, $scope.user.locationUserWantsToWorkIn);
-
-
-
-            // var getJobs = indeedapi.getIndeedJobs(headline, location, 0)
-            // getJobs.then(function(jobs) {
-            //     $scope.jobArray = jobs.jobArray;
-            //     $scope.totalResults = jobs.totalResults;
-            //     userPreferences.savePreferences($scope.user)
-            // })
+            $scope.modal.hide();
         }
 
 
@@ -90,15 +102,9 @@ else{
         //gets  jobs from the indeed api to display on the home page.
         $scope.getJobs = function(headline, location, start) {
             indeedapi.getIndeedJobs(headline, location, start||0).then(function(jobs) {
-                if(jobs.jobArray.length == 0){
-                    $scope.page +=1;
-                    $scope.getJobs(headline, location, (start+25))
-                }
-                else {
-                    $scope.currentJob = 0;
-                    $scope.jobArray = jobs.jobArray;
-                    $scope.totalResults = jobs.totalResults;
-                }
+                console.log(jobs.data)
+                $scope.loading = false;
+                $scope.jobArray = jobs.data;
             })
         };
 
@@ -116,8 +122,9 @@ else{
                 })
                 $scope.numberOfRecruiterJobs = jobsies.length;
                 $scope.jobArray = jobsies;
-
+                $scope.loading = false;
                 if ($scope.jobArray.length == 0) {
+                    $scope.loading = true;
                     $scope.getJobs(userHeadline, jobLocation)
                 }
             })
@@ -194,15 +201,11 @@ else{
                 }
             } else {
                 $scope.jobsSeen += 1;
-                if ($scope.jobsSeen == $scope.totalResults) {
-                    $scope.searchDone = true;
-                }
-                if ($scope.currentJob === $scope.jobArray.length) {
-                    if ($scope.jobsSeen < $scope.totalResults) {
-                        $scope.page += 1;
-                        $scope.currentJob = 0;
-                        $scope.getJobs($scope.user.jobUserLookingFor || $scope.userHeadline, $scope.user.locationUserWantsToWorkIn || $scope.jobLocation, 25 * $scope.page);
-                    }
+                if($scope.currentJob == $scope.jobArray.length){
+                    $scope.currentJob = 0;
+                    $scope.jobArray = [];
+                    $scope.loading = true;
+                    $scope.getJobs($scope.user.jobUserLookingFor||$scope.userHeadline, $scope.user.locationUserWantsToWorkIn||$scope.jobLocation, $scope.jobsSeen + 12)
                 }
                 if (status == 'save') {
                     // toast('Job Saved!! :)', 3000)
