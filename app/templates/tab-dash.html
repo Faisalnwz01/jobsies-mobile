@@ -32,31 +32,8 @@ Update Search Preferences
 
   </div>
 
-
-
-<td-cards>
-        <td-card ng-repeat="job in jobArray" on-swipe-left="saveOrPass('pass', job)"  on-swipe-right="saveOrPass('save', job)" on-partial-swipe="cardPartialSwipe(amt)" ng-show="$index===currentJob" class="card-{{$index}}">
-<div class="flip-container" ng-click = "flipCard()">
-  <div class="flipper">
-    <div class="{{cardClass}}">
-
-
-          <div class="image">
-            <center>
-            <h5>{{job.jobtitle}} At {{job.company}}</h5>
-            <h6>{{job.formattedLocationFull}}</h6>
-          </center>
-
-            <div class="no-text">NOPE</div>
-            <img src = "{{job.logo}}">
-            <h6>Description:</h6>
-            <p>{{job.snippet}}</p>
-            <div class="yes-text">SAVE</div>
-          </div>
-
   <div ng-show="!loading">
 <td-cards>
-
 
         <td-card ng-repeat="job in jobArray" on-swipe-left="saveOrPass('pass', job)"  on-swipe-right="saveOrPass('save', job)" on-partial-swipe="cardPartialSwipe(amt)" ng-show="$index===currentJob" class="card-{{$index}}" ng-click="flipCard()">
           <div class="list card">
@@ -79,9 +56,6 @@ Update Search Preferences
           </div>
         </div>
 
-
-      </div>
-
           <div class="image" ng-show="flip" style="margin-bottom:-20px">
           <div class="card">
             <div class="item item-divider">
@@ -89,7 +63,6 @@ Update Search Preferences
             </div>
              <div class="item item-body">
                 <div class="no-text">NOPE</div>
-
 
                 <p>{{job.summary}}...</p>
                 <div class="yes-text">SAVE</div>
@@ -103,10 +76,7 @@ Update Search Preferences
         </td-card>
       </td-cards>
 
-
       </div>
-
   </ion-content>
 </ion-view>
-
 
