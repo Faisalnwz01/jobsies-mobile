@@ -1,23 +1,26 @@
 <ion-view view-title="Login">
-  <ion-content>
-  <center>
-    
+<div class="bar bar-header bar-positive">
+     <h1 class="title">Jobsies</h1>
+</div>
+  <ion-content style="top: 100px;">
      <ion-slide-box>
          <ion-slide>
-        <div class= 'box'> Welcoem to Jobsies</div>
-        <img style="width: 95%;" src = '/images/intro-bg.jpg'>
+        <center>
+        <img style="width: 95%; margin-bottom: 15px;" src = '/images/intro-bg.jpg'>
+        <div class= 'box'><h2 style="color: #4A87EE;">Welcome to Jobsies</h2></div></center>
     </ion-slide>
     <ion-slide>
-        <div class= 'box'>Login With LinkedIn</div>
-        <img style="width: 95%;" src = '/images/linkedIN.jpeg'>
+        <center>
+        <img style="width: 75%; margin-bottom: 20px;" src = '/images/linkedIN.jpeg'></center>
     </ion-slide>
       <ion-slide>
-        <div class= 'box'>Find the Job of your Dreams</div>
-        <img style="width: 95%;" src = '/images/ionic.png'>
+        <center>
+        <img style="width: 80%; margin-bottom: 40px;" src = '/images/dreamjob.png'></center>
     </ion-slide>
   </ion-slide-box>
-  <button ng-click="loginOauth('linkedin')">Login With Linkedin</button>
-</center>
+  <button class="button button-full button-positive" ng-click="loginOauth('linkedin')">
+  Login With Linkedin
+</button>
   </ion-content>
 </ion-view>
 
