@@ -8,7 +8,7 @@
           show-reorder="shouldShowReorder"
           can-swipe="listCanSwipe">
 
-        <div  ng-repeat="job in jobArray" job="job">
+        <div  ng-repeat="job in savedJobsFrontPage" job="job">
           <ion-item class="item-stable"
                    ng-click="toggleGroup(job)"
                     ng-class="{active: isGroupShown(job)}">
