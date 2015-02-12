@@ -16,6 +16,22 @@ $ionicModal.fromTemplateUrl('my-modal.html', {
   };
 
 
+  $ionicModal.fromTemplateUrl('my-savedJobs.html', {
+    scope: $scope,
+    animation: 'slide-in-up'
+  }).then(function(modal) {
+    $scope.saved = modal;
+  });
+  $scope.openModalSave = function() {
+    $scope.saved.show();
+  };
+  $scope.closeModalSave = function() {
+    $scope.saved.hide();
+  };
+  
+
+
+
 $scope.flip = false; 
 
 $scope.flipCard = function(){

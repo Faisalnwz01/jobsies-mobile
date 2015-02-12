@@ -2,12 +2,15 @@
 <div class="bar bar-header bar-positive">
     <button class="button icon ion-ios7-search button-clear" ng-click="openModal()"></button>
      <h1 class="title">Job Search</h1>
+     <button class="button icon ion-bookmark button-clear" ng-click="openModalSave()"></button>
 </div>
+
   <ion-content class="padding" style="top: 100px;">
   <script id="my-modal.html" type="text/ng-template">
   <ion-modal-view>
     <ion-header-bar>
-      <h1 class="title">Update Search Preferences</h1>
+    <button class="button icon ion-arrow-left-c button-clear" ng-click="closeModal()"></button>
+      <h1 class="title">Jobsies</h1>
     </ion-header-bar>
     <ion-content>
 <form name="newSearch">
@@ -29,6 +32,48 @@ Update Search Preferences
 </button>
 </form>
     </ion-content>
+  </ion-modal-view>
+</script>
+
+<!-- modal for saved jobs -->
+  <script id="my-savedJobs.html" type="text/ng-template">
+  <ion-modal-view>
+   <div class="bar bar-header bar-positive">
+    <button class="button icon ion-arrow-left-c button-clear" ng-click="closeModalSave()"></button>
+     <h1 class="title">Saved Jobs</h1>
+</div>
+
+
+    <ion-content style="top: 100px;">
+
+      <ion-list show-delete="shouldShowDelete"
+          show-reorder="shouldShowReorder"
+          can-swipe="listCanSwipe">
+
+
+        <div  ng-repeat="job in savedJobsFrontPage" job="job">
+          <ion-item class="item-stable"
+                   ng-click="toggleGroup(job)"
+                    ng-class="{active: isGroupShown(job)}">
+                     <ion-option-button class="button-positive">
+      Share
+    </ion-option-button>
+            <p><b>{{job.jobtitle}}</b><i class="icon" style="float:right;" ng-class="isGroupShown(job) ? 'ion-minus' : 'ion-plus'"></i></p>
+            <p>Company: {{job.company}}</p>
+            <p>Location: {{job.formattedLocationFull}}</p>
+          </ion-item>
+          <ion-item class="item-text-wrap item-accordion"
+                    ng-show="isGroupShown(job)">
+
+                    <button class="button button-assertive" ng-click="removeJobFromUser(job)" style="position: inline; float: right;">delete</button>
+            {{job.snippet}}
+
+          </ion-item>
+        </div>
+      </ion-list>
+
+    </ion-content>
+
   </ion-modal-view>
 </script>
 
