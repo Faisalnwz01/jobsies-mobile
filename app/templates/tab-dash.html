@@ -3,14 +3,14 @@
     <button class="button icon ion-ios7-search button-clear" ng-click="openModal()"></button>
      <h1 class="title">Job Search</h1>
      <button class="button icon ion-bookmark button-clear" ng-click="openModalSave()"></button>
-     
 </div>
 
   <ion-content class="padding" style="top: 100px;">
   <script id="my-modal.html" type="text/ng-template">
   <ion-modal-view>
     <ion-header-bar>
-      <h1 class="title">Update Search Preferences</h1>
+    <button class="button icon ion-arrow-left-c button-clear" ng-click="closeModal()"></button>
+      <h1 class="title">Jobsies</h1>
     </ion-header-bar>
     <ion-content>
 <form>
@@ -33,6 +33,7 @@ Update Search Preferences
   <script id="my-savedJobs.html" type="text/ng-template">
   <ion-modal-view>
    <div class="bar bar-header bar-positive">
+    <button class="button icon ion-arrow-left-c button-clear" ng-click="closeModalSave()"></button>
      <h1 class="title">Saved Jobs</h1>
 </div>
 
