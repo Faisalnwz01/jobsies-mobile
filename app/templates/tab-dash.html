@@ -76,18 +76,22 @@
                     <ion-item class="item-text-wrap item-accordion item-stable" ng-switch-when="0"
                     ng-show="isGroupShown(job)">
 
-                    <button class="button button-assertive" ng-click="removeJobFromUser(job)" style="position: inline; float: right;">delete</button>
+                    
 
-            {{job.snippet}}
-                    <a class="button button-positive" target="_blank" href="{{job.url}}" style="float: right;">Read More</a>
+            {{job.snippet}}<br>
+            
+                    <a class="button button-positive" target="_blank" href="{{job.url}}" style="">Read More</a>
+                    <button class="button button-assertive" ng-click="removeJobFromUser(job)" style="">Delete</button>
                     
           </ion-item>
           <ion-item class="item-text-wrap item-accordion item-light" ng-switch-when="1"
                     ng-show="isGroupShown(job)">
 
-                    <button class="button button-assertive" ng-click="removeJobFromUser(job)" style="position: inline; float: right;">delete</button>
-            {{job.snippet}}
-                <a class="button button-positive" target="_blank" href="{{job.url}}" style="float: right;">Read More</a>
+                    
+            {{job.snippet}}<br>
+            
+                <a class="button button-positive" target="_blank" href="{{job.url}}" style="">Read More</a>
+                <button class="button button-assertive" ng-click="removeJobFromUser(job)" style="">Delete</button>
           </ion-item>
         </div>
       </ion-list>
