@@ -6,18 +6,27 @@ angular.module('starter.controllers', [])
 //  })
 // })
 
-.controller('LoginCtrl', function($scope, $window, $rootScope, $ionicSlideBoxDelegate) {
+.controller('LoginCtrl', function($scope, $window, $rootScope, $ionicSlideBoxDelegate, $cordovaOatuh) {
     $scope.nextSlide = function() {
-    $ionicSlideBoxDelegate.next();
-  }
-   $scope.loginOauth = function(provider) {
-
-      $window.location.href = 'http://localhost:9000/auth/' + provider;
-    };
-
+        $ionicSlideBoxDelegate.next();
+    }
     $rootScope.hideNav = true;
 
+        $scope.LinkedinLogin = function() {
+        $cordovaOauth.linkedin('786reoygk0xat4', 'WmznyJwYuKQrgqXF', [
+      'r_basicprofile',
+      'r_emailaddress',
+      'r_contactinfo',
+      'r_fullprofile'
+    ], 'state=DCEeFWf45A53sdfKef424').then(function(result) {
+            console.log(JSON.stringify(result));
+        }, function(error) {
+            console.log(error);
+        });
+    }
+
 })
+
 // .controller('SavedCtrl', function ($scope, SaveJobs) {
 //   SaveJobs.populateJobs().then(function (data) {
 //     console.log(data, 'dataaaaaa')
