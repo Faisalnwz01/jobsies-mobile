@@ -15,7 +15,7 @@
           can-swipe="listCanSwipe">
 
 
-        <div  ng-repeat="job in savedJobsFrontPage" job="job">
+        <div  ng-repeat="job in savedJobsFrontPage" job="job" ng-click="generateCoverLetter($index)">
           <ion-item class="item-stable"
                    ng-click="toggleGroup(job)"
                     ng-class="{active: isGroupShown(job)}">
@@ -28,9 +28,9 @@
           </ion-item>
           <ion-item class="item-text-wrap item-accordion"
                     ng-show="isGroupShown(job)">
-
                     <button class="button button-assertive" ng-click="removeJobFromUser(job)" style="position: inline; float: right;">delete</button>
             {{job.snippet}}
+            <a href="https://mail.google.com/mail/?view=cm&fs=1&to={{job.contact_information[0]}}&su={{job.jobtitle}} Position At {{job.company}}&body={{encodedEmail}}" target="_blank" ng-show="contact_info_for_job">Auto Apply</a>
 
           </ion-item>
         </div>

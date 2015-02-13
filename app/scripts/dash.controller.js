@@ -183,6 +183,7 @@ console.log($scope.user)
 
 //generating cover letter for auto reply to jobs
       $scope.generateCoverLetter = function(index){
+        console.log("generating")
         var today = new Date().getFullYear();
         $scope.contact_info_for_job = false;
 
