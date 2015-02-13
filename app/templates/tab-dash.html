@@ -52,23 +52,42 @@
           can-swipe="listCanSwipe">
 
 
-        <div  ng-repeat="job in savedJobsFrontPage" job="job">
-          <ion-item class="item-stable"
+        <div ng-repeat="job in savedJobsFrontPage" job="job" ng-switch="$index%2">
+          <ion-item class="item-stable" ng-switch-when="0"
                    ng-click="toggleGroup(job)"
                     ng-class="{active: isGroupShown(job)}">
                      <ion-option-button class="button-positive">
-      Share
-    </ion-option-button>
+              Share
+            </ion-option-button>
             <p><b>{{job.jobtitle}}</b><i class="icon" style="float:right;" ng-class="isGroupShown(job) ? 'ion-minus' : 'ion-plus'"></i></p>
             <p>Company: {{job.company}}</p>
             <p>Location: {{job.formattedLocationFull}}</p>
           </ion-item>
-          <ion-item class="item-text-wrap item-accordion"
+          <ion-item class="item-light" ng-switch-when="1"
+                   ng-click="toggleGroup(job)"
+                    ng-class="{active: isGroupShown(job)}">
+                     <ion-option-button class="button-positive">
+              Share
+            </ion-option-button>
+            <p><b>{{job.jobtitle}}</b><i class="icon" style="float:right;" ng-class="isGroupShown(job) ? 'ion-minus' : 'ion-plus'"></i></p>
+            <p>Company: {{job.company}}</p>
+            <p>Location: {{job.formattedLocationFull}}</p>
+          </ion-item>
+                    <ion-item class="item-text-wrap item-accordion item-stable" ng-switch-when="0"
+                    ng-show="isGroupShown(job)">
+
+                    <button class="button button-assertive" ng-click="removeJobFromUser(job)" style="position: inline; float: right;">delete</button>
+
+            {{job.snippet}}
+                    <a class="button button-positive" target="_blank" href="{{job.url}}" style="float: right;">Read More</a>
+                    
+          </ion-item>
+          <ion-item class="item-text-wrap item-accordion item-light" ng-switch-when="1"
                     ng-show="isGroupShown(job)">
 
                     <button class="button button-assertive" ng-click="removeJobFromUser(job)" style="position: inline; float: right;">delete</button>
             {{job.snippet}}
-
+                <a class="button button-positive" target="_blank" href="{{job.url}}" style="float: right;">Read More</a>
           </ion-item>
         </div>
       </ion-list>
