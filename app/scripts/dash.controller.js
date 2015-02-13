@@ -173,7 +173,6 @@ console.log($scope.user)
             //     console.log($scope.savedJobsFrontPage)
             // })
             SaveJobs.populateJobs().then(function(job) {
-              console.log(job, 'what pawel wantedd')
             $scope.savedJobsFrontPage = job.data.jobs_saved || [];
 
               console.log($scope.savedJobsFrontPage, 'saved jobs front page')
