@@ -28,10 +28,9 @@ angular.module('starter.controllers', [])
         ], 'DCEeFWf45A53sdfKef424')
         .then(function(result){
             $scope.pawel = result
-            $http.get("https://api.linkedin.com/v1/people/~:(first-name,last-name)?oauth2_access_token=" + $scope.pawel.access_token).then(function(data){
-               $scope.hit = "yes"
-               $scope.UserInfo = data;
-            })
+            $http.get("https://api.linkedin.com/v1/people/~:(first-name,last-name,id)?oauth2_access_token=" + $scope.pawel.access_token + "&format=json").then(function(data){
+              $scope.UserInfo = data
+            }) 
             
            
             // // window.localStorage.setItem("access_token", result.access_token);
