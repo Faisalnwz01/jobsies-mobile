@@ -6,21 +6,28 @@ angular.module('starter.controllers', [])
 //  })
 // })
 
-.controller('LoginCtrl', function($scope, $window, $rootScope, $ionicSlideBoxDelegate, $cordovaOatuh) {
+.controller('LoginCtrl', function($scope, $window, $rootScope, $ionicSlideBoxDelegate, $state, $http, $cordovaOauth) {
     $scope.nextSlide = function() {
         $ionicSlideBoxDelegate.next();
     }
     $rootScope.hideNav = true;
 
-        $scope.LinkedinLogin = function() {
-        $cordovaOauth.linkedin('786reoygk0xat4', 'WmznyJwYuKQrgqXF', [
-      'r_basicprofile',
-      'r_emailaddress',
-      'r_contactinfo',
-      'r_fullprofile'
-    ], 'state=DCEeFWf45A53sdfKef424').then(function(result) {
-            console.log(JSON.stringify(result));
-        }, function(error) {
+    $scope.LinkedinLogin = function() {
+      $cordovaOauth.linkedin('77jxr39wyisskn', 'WiIdb1rvQVoIa32c', [
+          'r_emailaddress',
+          'r_contactinfo',
+          'r_fullprofile'
+        ], 'DCEeFWf45A53sdfKef424')
+        .then(function(result){
+            // $scope.pawel = JSON.stringify(result);
+            // // window.localStorage.setItem("access_token", result.access_token);
+            // console.log(JSON.stringify(result));
+            // //$state.go('tab.dash') 
+            $http.get('https://api.linkedin.com/v1/people/~').then(function(data){
+               //console.log(data)
+               $scope.pawel = data;
+            })
+        }, function(error){
             console.log(error);
         });
     }
