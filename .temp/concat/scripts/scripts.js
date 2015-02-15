@@ -1,6 +1,290 @@
+
+var requestToken = "";
+var accessToken = "";
+var clientId = "client_id_here";
+var clientSecret = "client_secret_here";
+// Ionic Starter App
+
+// angular.module is a global place for creating, registering and retrieving Angular modules
+// 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
+// the 2nd parameter is an array of 'requires'
+// 'starter.services' is found in services.js
+// 'starter.controllers' is found in controllers.js
+angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter.services', 'dash.controllers',  'ngCookies', 'ngResource', 'ionic.contrib.ui.tinderCards', 'ngAutocomplete'])
+
+.run(["$ionicPlatform", function($ionicPlatform) {
+  $ionicPlatform.ready(function() {
+    // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
+    // for form inputs)
+    if (window.cordova && window.cordova.plugins.Keyboard) {
+      cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
+    }
+    if (window.StatusBar) {
+      // org.apache.cordova.statusbar required
+      StatusBar.styleDefault();
+    }
+  });
+}])
+
+.config(["$stateProvider", "$urlRouterProvider", function($stateProvider, $urlRouterProvider) {
+
+  // Ionic uses AngularUI Router which uses the concept of states
+  // Learn more here: https://github.com/angular-ui/ui-router
+  // Set up the various states which the app can be in.
+  // Each state's controller can be found in controllers.js
+  $stateProvider
+
+  // setup an abstract state for the tabs directive
+    .state('tab', {
+    url: "/tab",
+    templateUrl: "templates/tabs.html",
+    controller: 'DashCtrl'
+  })
+
+  // Each tab has its own nav history stack:
+
+  .state('tab.dash', {
+    url: '/dash:id',
+    views: {
+      'tab-dash': {
+        templateUrl: 'templates/tab-dash.html',
+        controller: 'DashCtrl'
+      }
+    }
+  })
+
+  .state('tab.saved', {
+    url: '/saved:id',
+    views: {
+      'tab-saved': {
+        templateUrl: 'templates/tab-saved.html',
+        controller: 'DashCtrl'
+      }
+    }
+  })
+
+  .state('tab.login', {
+      url: '/login',
+      views: {
+        'tab-login': {
+          templateUrl: 'templates/tab-login.html',
+          controller: 'LoginCtrl'
+        }
+      }
+    })
+    // .state('tab.chat-detail', {
+    //   url: '/chats/:chatId',
+    //   views: {
+    //     'tab-chats': {
+    //       templateUrl: 'templates/chat-detail.html',
+    //       controller: 'ChatDetailCtrl'
+    //     }
+    //   }
+    // })
+
+  .state('tab.friends', {
+      url: '/friends',
+      views: {
+        'tab-friends': {
+          templateUrl: 'templates/tab-friends.html',
+          controller: 'FriendsCtrl'
+        }
+      }
+    })
+    .state('tab.friend-detail', {
+      url: '/friend/:friendId',
+      views: {
+        'tab-friends': {
+          templateUrl: 'templates/friend-detail.html',
+          controller: 'FriendDetailCtrl'
+        }
+      }
+    })
+
+  .state('tab.account', {
+    url: '/account',
+    views: {
+      'tab-account': {
+        templateUrl: 'templates/tab-account.html',
+        controller: 'AccountCtrl'
+      }
+    }
+  });
+
+  // if none of the above states are matched, use this as the fallback
+  $urlRouterProvider.otherwise('/tab/login');
+
+}]);
+
+angular.module('starter.controllers', [])
+
+// .controller('DashCtrl', function($scope, $http) {
+//  $http.get("http://localhost:9000/api/things").then(function (thing){
+//   console.log(thing)
+//  })
+// })
+
+.controller('LoginCtrl', ["$scope", "$window", "$rootScope", "$ionicSlideBoxDelegate", "$state", "$http", "$cordovaOauth", function($scope, $window, $rootScope, $ionicSlideBoxDelegate, $state, $http, $cordovaOauth) {
+    $scope.nextSlide = function() {
+        $ionicSlideBoxDelegate.next();
+    }
+    $rootScope.hideNav = true;
+
+    $scope.LinkedinLogin = function() {
+      $cordovaOauth.linkedin('77jxr39wyisskn', 'WiIdb1rvQVoIa32c', [
+          'r_emailaddress',
+          'r_contactinfo',
+          'r_fullprofile'
+        ], 'DCEeFWf45A53sdfKef424')
+        .then(function(result){
+            // $scope.pawel = JSON.stringify(result);
+            // // window.localStorage.setItem("access_token", result.access_token);
+            // console.log(JSON.stringify(result));
+            // //$state.go('tab.dash') 
+            $http.get('https://api.linkedin.com/v1/people/~').then(function(data){
+               //console.log(data)
+               $scope.pawel = data;
+            })
+        }, function(error){
+            console.log(error);
+        });
+    }
+
+}])
+
+// .controller('SavedCtrl', function ($scope, SaveJobs) {
+//   SaveJobs.populateJobs().then(function (data) {
+//     console.log(data, 'dataaaaaa')
+//     $scope.savedJobs = data.data.jobs_saved
+//   })
+
+// })
+
+.controller('ChatDetailCtrl', ["$scope", "$stateParams", "Chats", function($scope, $stateParams, Chats) {
+  $scope.chat = Chats.get($stateParams.chatId);
+}])
+
+.controller('FriendsCtrl', ["$scope", function($scope) {
+  $scope.friends = Friends.all();
+}])
+
+.controller('FriendDetailCtrl', ["$scope", "$stateParams", "Friends", function($scope, $stateParams, Friends) {
+  $scope.friend = Friends.get($stateParams.friendId);
+}])
+
+.controller('AccountCtrl', ["$scope", function($scope) {
+  $scope.settings = {
+    enableFriends: true
+  };
+}]);
+
+angular.module('starter.services', [])
+
+.factory('Chats', function() {
+  // Might use a resource here that returns a JSON array
+
+  // Some fake testing data
+  var chats = [{
+    id: 0,
+    name: 'Ben Sparrow',
+    lastText: 'You on your way?',
+    face: 'https://pbs.twimg.com/profile_images/514549811765211136/9SgAuHeY.png'
+  }, {
+    id: 1,
+    name: 'Max Lynx',
+    lastText: 'Hey, it\'s me',
+    face: 'https://avatars3.githubusercontent.com/u/11214?v=3&s=460'
+  }, {
+    id: 2,
+    name: 'Andrew Jostlin',
+    lastText: 'Did you get the ice cream?',
+    face: 'https://pbs.twimg.com/profile_images/491274378181488640/Tti0fFVJ.jpeg'
+  }, {
+    id: 3,
+    name: 'Adam Bradleyson',
+    lastText: 'I should buy a boat',
+    face: 'https://pbs.twimg.com/profile_images/479090794058379264/84TKj_qa.jpeg'
+  }, {
+    id: 4,
+    name: 'Perry Governor',
+    lastText: 'Look at my mukluks!',
+    face: 'https://pbs.twimg.com/profile_images/491995398135767040/ie2Z_V6e.jpeg'
+  }];
+
+  return {
+    all: function() {
+      return chats;
+    },
+    remove: function(chat) {
+      chats.splice(chats.indexOf(chat), 1);
+    },
+    get: function(chatId) {
+      for (var i = 0; i < chats.length; i++) {
+        if (chats[i].id === parseInt(chatId)) {
+          return chats[i];
+        }
+      }
+      return null;
+    }
+  }
+})
+
+/**
+ * A simple example service that returns some data.
+ */
+.factory('Friends', function() {
+  // Might use a resource here that returns a JSON array
+
+  // Some fake testing data
+  var friends = [{
+    id: 0,
+    name: 'Ben Sparrow',
+    notes: 'Enjoys drawing things',
+    face: 'https://pbs.twimg.com/profile_images/514549811765211136/9SgAuHeY.png'
+  }, {
+    id: 1,
+    name: 'Max Lynx',
+    notes: 'Odd obsession with everything',
+    face: 'https://avatars3.githubusercontent.com/u/11214?v=3&s=460'
+  }, {
+    id: 2,
+    name: 'Andrew Jostlen',
+    notes: 'Wears a sweet leather Jacket. I\'m a bit jealous',
+    face: 'https://pbs.twimg.com/profile_images/491274378181488640/Tti0fFVJ.jpeg'
+  }, {
+    id: 3,
+    name: 'Adam Bradleyson',
+    notes: 'I think he needs to buy a boat',
+    face: 'https://pbs.twimg.com/profile_images/479090794058379264/84TKj_qa.jpeg'
+  }, {
+    id: 4,
+    name: 'Perry Governor',
+    notes: 'Just the nicest guy',
+    face: 'https://pbs.twimg.com/profile_images/491995398135767040/ie2Z_V6e.jpeg'
+  }];
+
+
+  return {
+    all: function() {
+      return friends;
+    },
+    get: function(friendId) {
+      // Simple index lookup
+      return friends[friendId];
+    }
+  }
+})
+// .factory('User', function($resource, $stateParams, $http) {
+//     return {
+//       get: function() {
+//         return $http.get('http://localhost:9000/api/users/mobile/' + $stateParams.id)
+//       }
+//     }
+//   });
+
 angular.module('dash.controllers', [])
 
-.controller('DashCtrl', function($scope, $http, $timeout, $log, $location, $window, $stateParams, $ionicModal) {});
+.controller('DashCtrl', ["$scope", "$http", "$timeout", "$log", "$location", "$window", "$stateParams", "$ionicModal", function($scope, $http, $timeout, $log, $location, $window, $stateParams, $ionicModal) {}]);
 
 // $ionicModal.fromTemplateUrl('my-modal.html', {
 //     scope: $scope,
@@ -275,3 +559,11 @@ angular.module('dash.controllers', [])
 //   $scope.isGroupShown = function(group) {
 //     return $scope.shownGroup === group;
 //   };
+
+"use strict";
+
+ angular.module('config', [])
+
+.constant('ENV', {name:'production',apiEndpoint:'http://api.yoursite.com/'})
+
+;
