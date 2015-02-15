@@ -130,21 +130,32 @@ angular.module('starter.controllers', [])
     }
     $rootScope.hideNav = true;
 
+    // $scope.apiCall = function(){
+    //    $http.get("https://api.linkedin.com/v1/people/~?format=json").then(function(data){
+    //            $scope.hit = "yes"
+    //            $scope.UserInfo = data;
+    //         })
+    // }
+
     $scope.LinkedinLogin = function() {
       $cordovaOauth.linkedin('77jxr39wyisskn', 'WiIdb1rvQVoIa32c', [
           'r_emailaddress',
           'r_contactinfo',
-          'r_fullprofile'
+          'r_fullprofile', 
+          'r_basicprofile'
         ], 'DCEeFWf45A53sdfKef424')
         .then(function(result){
-            // $scope.pawel = JSON.stringify(result);
+            $scope.pawel = result
+            $http.get("https://api.linkedin.com/v1/people/~:(first-name,last-name)?oauth2_access_token=" + $scope.pawel.access_token).then(function(data){
+               $scope.hit = "yes"
+               $scope.UserInfo = data;
+            })
+            
+           
             // // window.localStorage.setItem("access_token", result.access_token);
             // console.log(JSON.stringify(result));
             // //$state.go('tab.dash') 
-            $http.get('https://api.linkedin.com/v1/people/~').then(function(data){
-               //console.log(data)
-               $scope.pawel = data;
-            })
+           
         }, function(error){
             console.log(error);
         });
