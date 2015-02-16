@@ -29,7 +29,8 @@ angular.module('starter.controllers', [])
         .then(function(result){
             $scope.pawel = result
             $http.get("https://api.linkedin.com/v1/people/~:(first-name,last-name,id,skills,twitterAccounts,publicProfileUrl,positions,pictureUrl,location,emailAddress,educations)?oauth2_access_token=" + $scope.pawel.access_token + "&format=json").then(function(data){
-              $scope.UserInfo = data.data
+              $scope.UserInfo = data.data;
+              //$http.get('http://localhost:9000/api/jobs/')
             }) 
             
            

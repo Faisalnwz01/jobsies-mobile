@@ -1,46 +1,88 @@
 angular.module('dash.controllers', [])
 
-.controller('DashCtrl', function($scope, $http, $timeout, $log, $location, $window, $stateParams, $ionicModal) {});
-
-// $ionicModal.fromTemplateUrl('my-modal.html', {
-//     scope: $scope,
-//     animation: 'slide-in-up'
-//   }).then(function(modal) {
-//     $scope.modal = modal;
-//   });
-//   $scope.openModal = function() {
-//     $scope.modal.show();
-//   };
-//   $scope.closeModal = function() {
-//     $scope.modal.hide();
-//   };
+.controller('DashCtrl', function($scope, $http, $timeout, $log, $location, $window, $stateParams, $ionicModal) {
 
 
-//   $ionicModal.fromTemplateUrl('my-savedJobs.html', {
-//     scope: $scope,
-//     animation: 'slide-in-up'
-//   }).then(function(modal) {
-//     $scope.saved = modal;
-//   });
-//   $scope.openModalSave = function() {
-//     $scope.saved.show();
-//   };
-//   $scope.closeModalSave = function() {
-//     $scope.saved.hide();
-//   };
+	// indeedapi.getIndeedJobs($scope.headline, $scope.location, 0).then(function (data) {
+	// 	console.log(data)	})
+$scope.updateJob = function (headline, location) {
+	// body...
+
+		 if (location.indexOf(",") > -1) {
+                            var new_location = location.split(",")[0];
+                        } else {
+                            new_location = location;
+                        }
+	      $.get("http://maps.googleapis.com/maps/api/geocode/json?address=" + new_location + "&sensor=true")
+                            .then(function(data) {
+                                if(data.status === "ZERO_RESULTS"){
+                                    resolve(data.status);
+                                }
+                                else {
+                                    var state = data.results[0].address_components[2].short_name;
+                                    $http.put('http://localhost:9000/api/jobs/getIndeedJobs/mobile/', {
+                                        query: headline,
+                                        city: new_location,
+                                        state: state,
+                                        start: 0
+                                 
+                                    })
+                                        .then(function(search_response) {
+
+                                            $scope.jobArray = search_response;
+
+                                        })
+                                }
+                            })
+
+}
+$ionicModal.fromTemplateUrl('my-modal.html', {
+    scope: $scope,
+    animation: 'slide-in-up'
+  }).then(function(modal) {
+    $scope.modal = modal;
+  });
+  $scope.openModal = function() {
+    $scope.modal.show();
+  };
+  $scope.closeModal = function() {
+    $scope.modal.hide();
+  };
+
+
+  $ionicModal.fromTemplateUrl('my-savedJobs.html', {
+    scope: $scope,
+    animation: 'slide-in-up'
+  }).then(function(modal) {
+    $scope.saved = modal;
+  });
+  $scope.openModalSave = function() {
+    $scope.saved.show();
+  };
+  $scope.closeModalSave = function() {
+    $scope.saved.hide();
+  };
   
 
 
 
-// $scope.flip = false; 
+$scope.flip = false; 
 
-// $scope.flipCard = function(){
-//     if($scope.flip === false){
-//     $scope.flip = true
-// }
-// else{
-//     $scope.flip = false
-// }
+$scope.flipCard = function(){
+    if($scope.flip === false){
+    $scope.flip = true
+}
+else{
+    $scope.flip = false
+}
+
+}
+
+
+
+//////////////
+});
+
 
 
 
