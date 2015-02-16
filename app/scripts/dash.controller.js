@@ -81,19 +81,17 @@ else{
 }
 
 }
-
+$scope.savedJobsFrontPage = [];
     $scope.saveOrPass = function(status, job) {
             $scope.currentJob += 1;
-               // if (status == 'save') {
-               //          toast('Job Saved!! :)', 3000)
-               //          $scope.mobileSavedJobArray.push(job);
-               //          // SaveJobs.saveRecruiterJobs(job)
-               //          // setTimeout(function() {
-               //          //     $scope.getSavedJobsies();
-               //          // }, 1000)
-               //      } else if (status == 'pass') {
-               //          toast('Job Passed :(', 3000)
-               //      }
+               if (status == 'save') {
+                        //toast('Job Saved!! :)', 3000)
+                        $scope.savedJobsFrontPage.push(job);
+                        // SaveJobs.saveRecruiterJobs(job)
+                        // setTimeout(function() {
+                        //     $scope.getSavedJobsies();
+                        // }, 1000)
+                      }
           }
 
 //////////////
