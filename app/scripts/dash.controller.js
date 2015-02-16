@@ -94,6 +94,8 @@ $scope.savedJobsFrontPage = [];
                       }
           }
 
+
+
 //////////////
 });
 
