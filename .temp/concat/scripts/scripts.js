@@ -44,7 +44,7 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter
   // Each tab has its own nav history stack:
 
   .state('tab.dash', {
-    url: '/dash:id',
+    url: '/dash',
     views: {
       'tab-dash': {
         templateUrl: 'templates/tab-dash.html',
@@ -146,13 +146,12 @@ angular.module('starter.controllers', [])
         ], 'DCEeFWf45A53sdfKef424')
         .then(function(result){
             $scope.pawel = result
-            $http.get("https://api.linkedin.com/v1/people/~:(first-name,last-name,id,skills,twitterAccounts,publicProfileUrl,positions,pictureUrl,location,emailAddress,educations)?oauth2_access_token=" + $scope.pawel.access_token + "&format=json").then(function(data){
+            $http.get("https://api.linkedin.com/v1/people/~:(first-name,last-name,id,skills,twitterAccounts,publicProfileUrl,positions,pictureUrl,location,emailAddress,educations)?oauth2_access_token=" + $scope.pawel.access_token + "&format=json")
+            .then(function(data){
               $scope.UserInfo = data.data
-              // $http.put("http://jobsies.herokuapp.com/api/jobs/getIndeedJobs/mobile/").then(function (indeed){
-              //   $scope.pawel =  indeed;
-              //   console.log(indeed);
-              // })
+              
             }) 
+
             
            
             // // window.localStorage.setItem("access_token", result.access_token);
@@ -298,7 +297,18 @@ angular.module('starter.services', [])
 
 angular.module('dash.controllers', [])
 
-.controller('DashCtrl', ["$scope", "$http", "$timeout", "$log", "$location", "$window", "$stateParams", "$ionicModal", function($scope, $http, $timeout, $log, $location, $window, $stateParams, $ionicModal) {}]);
+.controller('DashCtrl', ["$scope", "$rootScope", "$http", "$timeout", "$log", "$location", "$window", "$stateParams", "$ionicModal", "$cordovaOauth", function($scope, $rootScope, $http, $timeout, $log, $location, $window, $stateParams, $ionicModal, $cordovaOauth) {
+console.log($rootScope.userInfo)
+
+   
+
+$http.put("https://jobsies.herokuapp.com/api/jobs/getIndeedJobs/mobile/", {query: "java", city: "new york city", state: "NY", start:0})
+	.then(function (indeed){
+        $scope.indeedCall =  indeed;
+        console.log(indeed);
+    })
+
+}]);
 
 // $ionicModal.fromTemplateUrl('my-modal.html', {
 //     scope: $scope,

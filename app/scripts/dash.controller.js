@@ -1,6 +1,17 @@
 angular.module('dash.controllers', [])
 
-.controller('DashCtrl', function($scope, $http, $timeout, $log, $location, $window, $stateParams, $ionicModal) {});
+.controller('DashCtrl', function($scope, $http, $timeout, $log, $location, $window, $stateParams, $ionicModal, $cordovaOauth) {
+console.log($rootScope.userInfo)
+
+   
+
+$http.put("https://jobsies.herokuapp.com/api/jobs/getIndeedJobs/mobile/", {query: "java", city: "new york city", state: "NY", start:0})
+	.then(function (indeed){
+        $scope.indeedCall =  indeed;
+        console.log(indeed);
+    })
+
+});
 
 // $ionicModal.fromTemplateUrl('my-modal.html', {
 //     scope: $scope,
