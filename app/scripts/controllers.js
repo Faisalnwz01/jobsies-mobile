@@ -28,9 +28,13 @@ angular.module('starter.controllers', [])
         ], 'DCEeFWf45A53sdfKef424')
         .then(function(result){
             $scope.pawel = result
-            $http.get("https://api.linkedin.com/v1/people/~:(first-name,last-name,id,skills,twitterAccounts,publicProfileUrl,positions,pictureUrl,location,emailAddress,educations)?oauth2_access_token=" + $scope.pawel.access_token + "&format=json").then(function(data){
-              $scope.UserInfo = data.data
-            }) 
+            // $http.get("https://api.linkedin.com/v1/people/~:(first-name,last-name,id,skills,twitterAccounts,publicProfileUrl,positions,pictureUrl,location,emailAddress,educations)?oauth2_access_token=" + $scope.pawel.access_token + "&format=json").then(function(data){
+            //   $scope.UserInfo = data.data
+            //   // $http.put("http://jobsies.herokuapp.com/api/jobs/getIndeedJobs/mobile/").then(function (indeed){
+            //   //   $scope.pawel =  indeed;
+            //   //   console.log(indeed);
+            //   // })
+            // }) 
             
            
             // // window.localStorage.setItem("access_token", result.access_token);
