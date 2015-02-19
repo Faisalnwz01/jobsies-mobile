@@ -27,7 +27,7 @@
             <p>Location: {{job.formattedLocationFull}}</p>
           </ion-item>
           <ion-item class="item-text-wrap item-accordion"
-                    ng-show="isGroupShown(job)">
+                    ng-show="isGroupShown(job)" ng-switch-when="1">
                     <button class="button button-assertive" ng-click="removeJobFromUser(job)" style="position: inline; float: right;">delete</button>
             {{job.snippet}}
             <a href="https://mail.google.com/mail/?view=cm&fs=1&to={{job.contact_information[0]}}&su={{job.jobtitle}} Position At {{job.company}}&body={{encodedEmail}}" target="_blank" ng-show="contact_info_for_job">Auto Apply</a>

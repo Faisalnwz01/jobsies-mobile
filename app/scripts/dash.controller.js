@@ -67,8 +67,20 @@ $ionicModal.fromTemplateUrl('my-modal.html', {
     $scope.saved.hide();
   };
   
-
-
+//*
+//    * if given group is the selected group, deselect it
+//    * else, select the given group
+//    */
+  $scope.toggleGroup = function(group) {
+    if ($scope.isGroupShown(group)) {
+      $scope.shownGroup = null;
+    } else {
+      $scope.shownGroup = group;
+    }
+  };
+$scope.isGroupShown = function(group) {
+    return $scope.shownGroup === group;
+  };
 
 $scope.flip = false; 
 
@@ -94,7 +106,10 @@ $scope.savedJobsFrontPage = [];
                       }
           }
 
-
+$scope.removeJobFromUser = function(job) {
+           var itemToRemove = $scope.savedJobsFrontPage.indexOf(job)
+           $scope.savedJobsFrontPage.splice(itemToRemove, 1);
+        }
 
 //////////////
 });
@@ -310,26 +325,9 @@ $scope.savedJobsFrontPage = [];
 //             console.log("end of save", $scope.currentJob);
 //         }
 
-//         $scope.removeJobFromUser = function(job) {
-//             SaveJobs.removeJobFromUser(job, $scope.user)
-//             .then(function() {
-//                 $scope.getSavedJobsies();
-//             })
-//         }
+//         
 
 // })
 
-//  /*
-//    * if given group is the selected group, deselect it
-//    * else, select the given group
-//    */
-//   $scope.toggleGroup = function(group) {
-//     if ($scope.isGroupShown(group)) {
-//       $scope.shownGroup = null;
-//     } else {
-//       $scope.shownGroup = group;
-//     }
-//   };
-//   $scope.isGroupShown = function(group) {
-//     return $scope.shownGroup === group;
-//   };
+
+// 
